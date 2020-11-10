@@ -1,12 +1,12 @@
 from django.db import models
 
-from coureser.managers.FilmManager import FilmManager
-from coureser.models.Actor import Actor
-from coureser.models.Country import Country
-from coureser.models.Genre import Genre
+from modules.managers.FilmManager import FilmManager
+from app.models.Actor import Actor
+from app.models.Country import Country
+from app.models.Genre import Genre
 
 
-class Film(models.Model):
+class FilmORM(models.Model):
     year = models.IntegerField(default=0)
     title = models.TextField()
     description = models.TextField()

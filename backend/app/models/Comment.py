@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from django.db import models
 
-from coureser.models.Film import Film
-from coureser.models.Profile import Profile
+from app.models.Film import Film
+from app.models.Profile import Profile
 
 
 class Comment(models.Model):

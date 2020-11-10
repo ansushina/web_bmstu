@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'app',
     'rest_framework',
     'drf_yasg',
+    'modules.entities'
 ]
 
 REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
@@ -82,14 +83,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'default2': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sites.to.watch',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': ''
     }
 }
 
