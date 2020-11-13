@@ -13,7 +13,7 @@ def get_country_usecase() -> CountryUsecases:
 class CountriesListView(APIView):
     def get(self, request, format=None):
         usecase = get_country_usecase()
-        countries = usecase.get_all_countrys()
+        countries = usecase.get_all_countries()
         print(countries)
         countries_serialiser = {
             'countries': countries

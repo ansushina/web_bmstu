@@ -11,7 +11,7 @@ class CountryUsecases:
         country = self.country_repo.get(country_id)
         return country
 
-    def get_all_countrys(self) -> List[Country]:
+    def get_all_countries(self) -> List[Country]:
         countries = self.country_repo.get_all()
         return countries
 

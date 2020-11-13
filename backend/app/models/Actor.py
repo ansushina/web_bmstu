@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Actor(models.Model):
+class ActorORM(models.Model):
     firstName = models.TextField()
     lastName = models.TextField()
 

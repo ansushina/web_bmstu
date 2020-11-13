@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from modules.DBRepo.GenreDBRepo import GenreDBRepo
@@ -11,10 +12,10 @@ def get_genre_usecase() -> GenreUsecases:
 
 
 class GenreView(APIView):
+    @swagger_auto_schema(responses={200: GenreSerializer()})
     def get(self, request, pk, format=None):
         usecase = get_genre_usecase()
         genre = usecase.get_genre(pk)
         serializer = GenreSerializer(genre)
         print(serializer.data)
         return Response(serializer.data)
-
