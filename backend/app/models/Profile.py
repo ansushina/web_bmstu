@@ -2,10 +2,10 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
-from coureser.managers.ProfileManger import ProfileManager
+# from coureser.managers.ProfileManger import ProfileManager
 
 
-class Profile(models.Model):
+class ProfileORM(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE)
@@ -17,7 +17,7 @@ class Profile(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
-    objects = ProfileManager()
+    # objects = ProfileManager()
 
     def __str__(self):
         return self.user.username
