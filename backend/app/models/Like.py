@@ -1,12 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from coureser.managers.LikeManager import LikeManager
-from coureser.models.Film import Film
-from coureser.models.Profile import Profile
+from app.models.Film import FilmORM as Film
+from app.models.Profile import ProfileORM as Profile
 
 
-class Like(models.Model):
+class LikeORM(models.Model):
     film = models.ForeignKey(
         to=Film,
         on_delete=models.CASCADE
@@ -19,7 +18,7 @@ class Like(models.Model):
     value = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    objects = LikeManager()
+    # objects = LikeManageger()
 
     def __str__(self):
         return "from " + self.author.user.username + " on " + self.film.title

@@ -12,6 +12,8 @@ from .views.FilmView import FilmView
 from .views.FilmsListView import FilmsListView
 from .views.GenreView import GenreView
 from .views.GenresListView import GenresListView
+from .views.LikeView import LikeView
+from .views.LikesListView import LikesListView
 from .views.SessionView import SessionView
 from .views.UserView import UserView
 
@@ -28,4 +30,6 @@ urlpatterns = [
     path('films/', FilmsListView.as_view()),
     path('films/<int:film_id>/comments/', CommentsListView.as_view()),
     path('films/<int:film_id>/comments/<int:pk>/', CommentView.as_view()),
+    path('films/<int:film_id>/likes/', LikesListView.as_view()),
+    path('films/<int:film_id>/likes/<int:pk>/', LikeView.as_view()),
 ]

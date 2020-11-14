@@ -87,9 +87,10 @@ class FilmDBRepo:
             films.append(FilmDBRepo.decode_orm_film(orm_film))
         return films
 
-    def count_rating(self, film_id):
-        film = Film.objects.get(id=film_id)
-        likes = film.like_set.all()
+    @staticmethod
+    def count_rating(film_id):
+        film = FilmORM.objects.get(id=film_id)
+        likes = film.likeorm_set.all()
         sum = 0
         for like in likes:
             sum += like.value
