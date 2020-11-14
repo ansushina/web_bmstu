@@ -44,3 +44,17 @@ class UserView(APIView):
         serializer = UserSerializer(session)
         print(serializer.data)
         return Response(serializer.data)
+
+    def patch(self, request):
+        if not request.user.is_authenticated:
+            return Response({'Error': "Please login first"}, status="400")
+        usecase = get_user_usecase()
+        print(request.POST)
+        user = usecase.update_user(user_data={
+            'username': request.POST.get('username', None),
+            'email': request.POST.get('email', None),
+            'id': request.user.id,
+        })
+        serializer = UserSerializer(user)
+        print(serializer.data)
+        return Response(serializer.data)

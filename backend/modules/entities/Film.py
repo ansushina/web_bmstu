@@ -6,9 +6,8 @@ class Film:
                  genres,
                  actors,
                  countries,
-                 image,
-                 created,
-                 comments,
+                 image=None,
+                 created=None,
                  rating=0,
                  id=None):
         self.id = id
@@ -21,10 +20,5 @@ class Film:
         self.countries = countries
         self.image = image
         self.created = created
-        self.comments = comments
-
-        @property
-        def title(self):
-            return self.title
 
 

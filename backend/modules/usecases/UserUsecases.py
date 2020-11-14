@@ -20,3 +20,9 @@ class UserUsecases:
         user = User(username=user_data['username'],
                     password=user_data['password'])
         return self.user_repo.create_session(user)
+
+    def update_user(self, user_data)-> User:
+        user = User(username=user_data['username'],
+                    email=user_data['email'],
+                    id=user_data['id'])
+        return self.user_repo.update(user)

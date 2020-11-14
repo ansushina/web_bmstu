@@ -1,9 +1,8 @@
 from django.db import models
 
-from modules.managers.FilmManager import FilmManager
-from app.models.Actor import Actor
-from app.models.Country import Country
-from app.models.Genre import Genre
+from app.models.Actor import ActorORM as Actor
+from app.models.Country import CountryORM as Country
+from app.models.Genre import GenreORM as Genre
 
 
 class FilmORM(models.Model):
@@ -29,7 +28,7 @@ class FilmORM(models.Model):
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
-    objects = FilmManager()
+    # objects = FilmManager()
 
     def __str__(self):
         return self.title

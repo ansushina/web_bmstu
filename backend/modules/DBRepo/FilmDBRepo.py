@@ -1,35 +1,91 @@
+from typing import List
+
 from app.models.Film import FilmORM
 from django.db.models import Count, Q
+
+from modules.DBRepo.ActorDBRepo import ActorDBRepo
+from modules.DBRepo.CountryDBRepo import CountryDBRepo
+from modules.DBRepo.GenreDBRepo import GenreDBRepo
 from modules.entities.Film import Film
 
+
 class FilmDBRepo:
-    def _decode_ORM(self, orm_film):
-        entity = Film(title=orm_film.title,
-                      year=orm_film.year,
-                      description=orm_film.description,
-                      id=orm_film.id,
-                      genres=orm_film.genres,
-                      actors=orm_film.actors,
-                      countries=orm_film.countries,
-                      image=orm_film.image,
-                      created=orm_film.created_at,
-                      comments=orm_film.comment_set.all(),
-                      rating=orm_film.rating,
-                      )
+    @staticmethod
+    def decode_orm_film(orm_film) -> Film:
+        genres = []
+        for g in orm_film.genres.all():
+            genres.append(GenreDBRepo.decode_orm_genre(g))
 
-    def get(self, id):
-        orm_film = FilmORM.objects.get(id=id)
-        # parse film to entity
-        return self._decode_ORM(orm_film)
+        actors = []
+        for a in orm_film.actors.all():
+            actors.append(ActorDBRepo.decode_orm_actor(a))
 
-    def new_top(self):
-        return Film.objects.order_by('-created_at')[:10]
+        countries = []
+        for g in orm_film.countries.all():
+            countries.append(CountryDBRepo.decode_orm_country(g))
 
-    def most_commented(self):
-        return Film.objects.annotate(count=Count('comment')).order_by('-count')[:10]
+        return Film(title=orm_film.title,
+                    year=orm_film.year,
+                    description=orm_film.description,
+                    id=orm_film.id,
+                    genres=genres,
+                    actors=actors,
+                    countries=countries,
+                    image=orm_film.image,
+                    created=orm_film.created_at,
+                    rating=orm_film.rating,
+                    )
 
-    def most_rating(self):
-        return Film.objects.order_by('-rating')[:10]
+    @staticmethod
+    def get(film_id):
+        orm_film = FilmORM.objects.get(id=film_id)
+        return FilmDBRepo.decode_orm_film(orm_film)
+
+    @staticmethod
+    def _sort_films(orm_films, sort='title'):
+        if sort == 'date':
+            return orm_films.order_by('-created_at')
+        elif sort == 'rating':
+            return orm_films.order_by("-rating")
+        elif sort == 'comments':
+            return orm_films.annotate(count=Count('comment')).order_by('-count')
+        else:
+            return orm_films.order_by("-title")
+
+    @staticmethod
+    def get_all(paramsdict: dict) -> List[Film]:
+        orm_films = FilmORM.objects.all()
+        orm_films = FilmDBRepo._sort_films(orm_films, paramsdict.get('sort', ['title'])[0])
+
+        params = ['q', 'genre', 'country', 'actor', 'year_from', 'year_to']
+        for p in params:
+            item = paramsdict.get(p, [])
+            if len(item) == 1:
+                if p == 'q' and item[0] != '':
+                    orm_films = orm_films.filter(
+                        Q(title__icontains=item[0])
+                    )
+                if p == 'year_from' and item[0] != '':
+                    orm_films = orm_films.filter(year__gte=item[0])
+                elif p == 'year_to' and item[0] != '':
+                    orm_films = orm_films.filter(year__lte=item[0])
+            if len(item) >= 1:
+                if p == 'genre':
+                    orm_films = orm_films.filter(genres__id__in=item)
+                elif p == 'country':
+                    orm_films = orm_films.filter(countries__id__in=item)
+                elif p == 'actor':
+                    orm_films = orm_films.filter(actors__id__in=item)
+
+        offset = paramsdict.get('offset', [0])[0]
+        limit = paramsdict.get('limit', [10])[0]
+
+        orm_films = orm_films[int(offset): int(offset) + int(limit)]
+
+        films = []
+        for orm_film in orm_films:
+            films.append(FilmDBRepo.decode_orm_film(orm_film))
+        return films
 
     def count_rating(self, film_id):
         film = Film.objects.get(id=film_id)
@@ -41,27 +97,3 @@ class FilmDBRepo:
             rating = sum / len(likes)
             setattr(film, 'rating', rating)
             film.save(update_fields=['rating'])
-
-    def search_with_filters(self, querydict):
-        films = Film.objects.all()
-        params = ['q', 'genre', 'country', 'actor', 'year_from', 'year_to']
-        for p in params:
-            item = querydict.getlist(p)
-            if len(item) == 1:
-                if p == 'q' and item[0] != '':
-                    films = films.filter(
-                        Q(title__icontains=item[0])
-                    )
-                if p == 'year_from' and item[0] != '':
-                    films = films.filter(year__gte=item[0])
-                elif p == 'year_to' and item[0] != '':
-                    films = films.filter(year__lte=item[0])
-            if len(item) >= 1:
-                if p == 'genre':
-                    films = films.filter(genres__id__in=item)
-                elif p == 'country':
-                    films = films.filter(countries__id__in=item)
-                elif p == 'actor':
-                    films = films.filter(actors__id__in=item)
-        return films
-

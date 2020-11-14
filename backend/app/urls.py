@@ -6,6 +6,8 @@ from .views.ActorView import ActorView
 from .views.ActorsListView import ActorsListView
 from .views.CountriesListView import CountriesListView
 from .views.CountryView import CountryView
+from .views.FilmView import FilmView
+from .views.FilmsListView import FilmsListView
 from .views.GenreView import GenreView
 from .views.GenresListView import GenresListView
 from .views.SessionView import SessionView
@@ -19,5 +21,7 @@ urlpatterns = [
     path('actors/', ActorsListView.as_view()),
     path('actors/<int:pk>/', ActorView.as_view()),
     path('sessions/', SessionView.as_view()),
-    path('users/', UserView.as_view())
+    path('users/', UserView.as_view()),
+    path('films/<int:pk>/', FilmView.as_view()),
+    path('films/', FilmsListView.as_view())
 ]

@@ -1,30 +1,20 @@
-from coureser.forms.CommentForm import CommentForm
-from coureser.forms.LikeForm import LikeForm
-from coureser.logic.CommentLogic import CommentLogic
-from coureser.logic.LikeLogic import LikeLogic
-from coureser.models.Film import Film
-from django.shortcuts import redirect
-from django.views.generic import FormView, DetailView
+from rest_framework.views import APIView
+
+from modules.DBRepo.FilmDBRepo import FilmDBRepo
+from modules.usecases.FilmUsecases import FilmUsecases
+from modules.serializers.FilmSerializer import FilmSerializer
+from rest_framework.response import Response
 
 
-# Interface Adapter Layer
+def get_film_usecase() -> FilmUsecases:
+    return FilmUsecases(FilmDBRepo())
 
 
-class FilmView(FormView, DetailView):
-    form_class = CommentForm
-    template_name = 'film.html'
-    model = Film
+class FilmView(APIView):
+    def get(self, request, pk, format=None):
+        usecase = get_film_usecase()
+        film = usecase.get_film(pk)
+        serializer = FilmSerializer(film)
+        print(serializer.data)
+        return Response(serializer.data)
 
-    def form_valid(self, form):
-        if not self.request.user.is_authenticated:
-            return redirect('/login/')
-
-        CommentLogic.comment(form.cleaned_data['text'], self.request.user, self.kwargs['pk'])
-        comments, page = CommentLogic.paginate(self.request, self.kwargs['pk'])
-        return redirect('/film/' + str(self.kwargs['pk']) + '/' + '?page=' + str(page) + '#paginated')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form_like'] = LikeForm(LikeLogic.get_like_data(self.kwargs['pk'], self.request.user))
-        context['comments'], p = CommentLogic.paginate(self.request, self.kwargs['pk'])
-        return context

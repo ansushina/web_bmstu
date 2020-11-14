@@ -64,3 +64,24 @@ class UserDBRepo:
         )
 
         return session, None
+
+    @staticmethod
+    def update(user: User):
+        user_fields, profile_fields = ['username', 'email'], ['avatar']
+        fields_to_update = {'user': [], 'profile': []}
+        profile = ProfileORM.objects.get(user=user.id)
+        orm_user = UserORM.objects.get(pk=user.id)
+        for key in user_fields:
+            value = user.__getattribute__(key)
+            if value != '':
+                fields_to_update['user'].append(key)
+                setattr(orm_user, key, value)
+
+        value = user.__getattribute__('avatar')
+        if value:
+            fields_to_update['profile'].append('avatar')
+            print(value)
+            setattr(profile, 'avatar', value)
+        orm_user.save(update_fields=fields_to_update['user'])
+        profile.save(update_fields=fields_to_update['profile'])
+        return UserDBRepo._decode_orm_user_profile(profile)
