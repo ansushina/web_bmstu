@@ -1,10 +1,10 @@
 from django.db import models
 
-from app.models.Film import Film
-from app.models.Profile import Profile
+from app.models.Film import FilmORM as Film
+from app.models.Profile import ProfileORM as Profile
 
 
-class Comment(models.Model):
+class CommentORM(models.Model):
     text = models.TextField()
     author = models.ForeignKey(
         to=Profile,

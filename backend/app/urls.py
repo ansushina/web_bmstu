@@ -4,6 +4,8 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from .views.ActorView import ActorView
 from .views.ActorsListView import ActorsListView
+from .views.CommentView import CommentView
+from .views.CommentsListView import CommentsListView
 from .views.CountriesListView import CountriesListView
 from .views.CountryView import CountryView
 from .views.FilmView import FilmView
@@ -23,5 +25,7 @@ urlpatterns = [
     path('sessions/', SessionView.as_view()),
     path('users/', UserView.as_view()),
     path('films/<int:pk>/', FilmView.as_view()),
-    path('films/', FilmsListView.as_view())
+    path('films/', FilmsListView.as_view()),
+    path('films/<int:film_id>/comments/', CommentsListView.as_view()),
+    path('films/<int:film_id>/comments/<int:pk>/', CommentView.as_view()),
 ]

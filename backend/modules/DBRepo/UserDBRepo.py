@@ -11,7 +11,7 @@ from django.contrib.auth.models import User as UserORM
 
 class UserDBRepo:
     @staticmethod
-    def _decode_orm_user_profile(orm_user_profile):
+    def decode_orm_user_profile(orm_user_profile):
         return User(id=orm_user_profile.id,
                     username=orm_user_profile.user.username,
                     email=orm_user_profile.user.email,
@@ -21,7 +21,7 @@ class UserDBRepo:
     @staticmethod
     def get(user_id) -> User:
         orm_user_profile = ProfileORM.objects.get(user_id=user_id)
-        return UserDBRepo._decode_orm_user_profile(orm_user_profile)
+        return UserDBRepo.decode_orm_user_profile(orm_user_profile)
 
     @staticmethod
     def create(user: User) -> (User, str):
@@ -40,7 +40,7 @@ class UserDBRepo:
         orm_user_profile = ProfileORM.objects.create(user=orm_user)
         orm_user.save()
         orm_user_profile.save()
-        return UserDBRepo._decode_orm_user_profile(orm_user_profile), None
+        return UserDBRepo.decode_orm_user_profile(orm_user_profile), None
 
     @staticmethod
     def create_session(user: User) -> (Session, str):
@@ -84,4 +84,4 @@ class UserDBRepo:
             setattr(profile, 'avatar', value)
         orm_user.save(update_fields=fields_to_update['user'])
         profile.save(update_fields=fields_to_update['profile'])
-        return UserDBRepo._decode_orm_user_profile(profile)
+        return UserDBRepo.decode_orm_user_profile(profile)
