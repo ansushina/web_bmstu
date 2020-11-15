@@ -19,9 +19,11 @@ class UserDBRepo:
                     created=orm_user_profile.created_at)
 
     @staticmethod
-    def get(user_id) -> User:
+    def get(user_id) -> (User, str):
         orm_user_profile = ProfileORM.objects.get(user_id=user_id)
-        return UserDBRepo.decode_orm_user_profile(orm_user_profile)
+        if not orm_user_profile:
+            return None, "NotExist"
+        return UserDBRepo.decode_orm_user_profile(orm_user_profile), None
 
     @staticmethod
     def create(user: User) -> (User, str):
@@ -53,7 +55,7 @@ class UserDBRepo:
             password=user.password
         )
         if not orm_user:
-            return None, "user_not_exist"
+            return None, "notExist"
 
         payload = jwt_payload_handler(orm_user)
         token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
@@ -66,11 +68,17 @@ class UserDBRepo:
         return session, None
 
     @staticmethod
-    def update(user: User):
+    def update(user: User) -> (User, str):
         user_fields, profile_fields = ['username', 'email'], ['avatar']
         fields_to_update = {'user': [], 'profile': []}
         profile = ProfileORM.objects.get(user=user.id)
+
+        if not profile:
+            return None, "NotExist"
         orm_user = UserORM.objects.get(pk=user.id)
+        if not orm_user:
+            return None, "NotExist"
+
         for key in user_fields:
             value = user.__getattribute__(key)
             if value != '':
@@ -84,4 +92,4 @@ class UserDBRepo:
             setattr(profile, 'avatar', value)
         orm_user.save(update_fields=fields_to_update['user'])
         profile.save(update_fields=fields_to_update['profile'])
-        return UserDBRepo.decode_orm_user_profile(profile)
+        return UserDBRepo.decode_orm_user_profile(profile), None

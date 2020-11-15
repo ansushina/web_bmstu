@@ -25,7 +25,7 @@ class CommentDBRepo:
 
     @staticmethod
     def get_all(film_id, offset=0, limit=10) -> List[Comment]:
-        orm_comments = CommentORM.objects.filter(film__id=film_id)[offset: offset+limit]
+        orm_comments = CommentORM.objects.filter(film__id=film_id)[int(offset): int(offset)+int(limit)]
         comments = []
         for orm_comment in orm_comments:
             comments.append(CommentDBRepo.decode_orm_comment(orm_comment))

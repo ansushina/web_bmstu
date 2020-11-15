@@ -1,21 +1,26 @@
+from django.core.exceptions import ObjectDoesNotExist
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework.renderers import JSONRenderer
-from rest_framework.views import APIView
-from modules.DBRepo.GenreDBRepo import GenreDBRepo
-from modules.usecases.GenreUsecases import GenreUsecases
-from modules.serializers.GenreSerializer import GenreSerializer
+from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-
-def get_genre_usecase() -> GenreUsecases:
-    return GenreUsecases(GenreDBRepo())
+from modules.factories.GenreFactory import GenreFactory
+from modules.serializers.ErrorSerializer import ErrorSerializer
+from modules.serializers.GenreSerializer import GenreSerializer
 
 
 class GenreView(APIView):
-    @swagger_auto_schema(responses={200: GenreSerializer()})
+    @swagger_auto_schema(
+        operation_summary="Returns info about one genre",
+        responses={200: GenreSerializer(),
+                   404: ErrorSerializer()},
+    )
     def get(self, request, pk, format=None):
-        usecase = get_genre_usecase()
-        genre = usecase.get_genre(pk)
-        serializer = GenreSerializer(genre)
-        print(serializer.data)
-        return Response(serializer.data)
+        usecase = GenreFactory.get_genre_usecase()
+        try:
+            genre = usecase.get_genre(pk)
+            serializer = GenreSerializer(genre)
+            print(serializer.data)
+            return Response(serializer.data)
+        except ObjectDoesNotExist:
+            raise NotFound()

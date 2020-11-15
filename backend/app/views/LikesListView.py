@@ -1,36 +1,48 @@
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework.exceptions import ParseError, NotAuthenticated, NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from modules.DBRepo.FilmDBRepo import FilmDBRepo
-from modules.DBRepo.LikeDBRepo import LikeDBRepo
+from modules.factories.LikeFactory import LikeFactory
+from modules.serializers.ErrorSerializer import ErrorSerializer
 from modules.serializers.LikeSerializer import LikeSerializer
-from modules.usecases.LikeUsecases import LikeUsecases
-
-
-def get_like_usecase() -> LikeUsecases:
-    return LikeUsecases(LikeDBRepo(), FilmDBRepo())
 
 
 class LikesListView(APIView):
+    @swagger_auto_schema(
+        operation_summary="Create like",
+        responses={200: LikeSerializer(),
+                   400: ErrorSerializer(),
+                   401: ErrorSerializer()},
+        request_body=LikeSerializer())
     def post(self, request, film_id):
         if not request.POST.get('value', False):
-            return Response({'Error': "Please provide text"}, status="400")
-        usecase = get_like_usecase()
+            raise ParseError(detail="Please provide value")
+
+        usecase = LikeFactory.get_like_usecase()
         like, error = usecase.create_like(film_id=film_id,
                                           user_id=request.user.id,
                                           value=request.POST['value'])
+
         if error == 'AlreadyExist':
-            return Response({'Error': error}, status="400")
+            raise ParseError(detail=error)
         serializer = LikeSerializer(like)
         print(serializer.data)
         return Response(serializer.data)
 
+    @swagger_auto_schema(
+        operation_summary="Returns info about like",
+        responses={200: LikeSerializer(),
+                   404: ErrorSerializer()}, )
     def get(self, request, film_id):
-        usecase = get_like_usecase()
+        if not request.user.is_authenticated:
+            raise NotAuthenticated(detail='Please login first', code="401")
+
+        usecase = LikeFactory.get_like_usecase()
         like, error = usecase.get_like_by_user_and_film(film_id=film_id,
                                                         user_id=request.user.id)
         if error == 'NotExist':
-            return Response({'Error': "NotExist"}, status="400")
+            raise NotFound()
 
         serializer = LikeSerializer(like)
         print(serializer.data)
