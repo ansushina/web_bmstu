@@ -26,12 +26,12 @@ class CommentsListView(APIView):
         comments = usecase.get_all_comments(film_id=film_id,
                                             offset=request.GET.get('offset', 0),
                                             limit=request.GET.get('limit', 10))
-        print(comments)
+        # print(comments)
         comments_serializer = {
             'comments': comments
         }
         serializer = CommentsListSerializer(comments_serializer)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
 
     @swagger_auto_schema(
@@ -48,5 +48,5 @@ class CommentsListView(APIView):
                                          user_id=request.user.id,
                                          text=request.POST['text'])
         serializer = CommentSerializer(comment)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)

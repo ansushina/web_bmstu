@@ -27,7 +27,7 @@ class LikesListView(APIView):
         if error == 'AlreadyExist':
             raise ParseError(detail=error)
         serializer = LikeSerializer(like)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
 
     @swagger_auto_schema(
@@ -45,5 +45,5 @@ class LikesListView(APIView):
             raise NotFound()
 
         serializer = LikeSerializer(like)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)

@@ -50,7 +50,7 @@ class FilmDBRepo:
         elif sort == 'comments':
             return orm_films.annotate(count=Count('comment')).order_by('-count')
         else:
-            return orm_films.order_by("-title")
+            return orm_films.order_by("title")
 
     @staticmethod
     def get_all(paramsdict: dict) -> List[Film]:

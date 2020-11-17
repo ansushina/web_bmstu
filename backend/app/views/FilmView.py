@@ -21,7 +21,7 @@ class FilmView(APIView):
         try:
             film = usecase.get_film(pk)
             serializer = FilmSerializer(film)
-            print(serializer.data)
+            # print(serializer.data)
             return Response(serializer.data)
         except ObjectDoesNotExist:
             raise NotFound()

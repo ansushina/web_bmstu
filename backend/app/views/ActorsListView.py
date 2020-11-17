@@ -19,5 +19,5 @@ class ActorsListView(APIView):
             'actors': actors
         }
         serializer = ActorsListSerializer(actors_serializer)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)

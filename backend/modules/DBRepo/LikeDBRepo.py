@@ -15,7 +15,7 @@ class LikeDBRepo:
 
     @staticmethod
     def get(like_id) -> Like:
-        print(like_id)
+        # print(like_id)
         orm_like = LikeORM.objects.get(pk=like_id)
         return LikeDBRepo.decode_orm_like(orm_like)
 

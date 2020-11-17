@@ -12,7 +12,7 @@ class GenreDBRepo:
 
     @staticmethod
     def get(genre_id) -> Genre:
-        print(genre_id)
+        # print(genre_id)
         orm_genre = GenreORM.objects.get(pk=genre_id)
         return GenreDBRepo.decode_orm_genre(orm_genre)
 

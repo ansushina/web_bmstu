@@ -99,10 +99,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mycourse',
-        'USER': 'courseuser',
-        'PASSWORD': 'database2020',
-        # 'USER': 'user_read_only',
-        # 'PASSWORD': 'readonlypassword',
+        # 'USER': 'courseuser',
+        # 'PASSWORD': 'database2020',
+        'USER': 'user_read_only',
+        'PASSWORD': 'readonlypassword',
         'HOST': 'localhost',
         'PORT': ''
     }
@@ -144,7 +144,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 MEDIA_ROOT = '/home/nastya/iu7/web_bmstu/static/'
 
 MEDIA_URL = "/"

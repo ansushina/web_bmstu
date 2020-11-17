@@ -20,15 +20,15 @@ class FilmsListView(APIView):
         usecase = FilmFactory.get_film_usecase()
         query_params = QueryDict(query_string=self.request.GET.urlencode(), mutable=True)
         params = dict(query_params)
-        print(params)
+        # print(params)
         ser_params = FilmQuerySerializer(data=query_params)
         if not ser_params.is_valid():
             raise ParseError()
         films = usecase.get_all_films(params)
-        print(films)
+        # print(films)
         films_serialiser = {
             'films': films
         }
         serializer = FilmsListSerializer(films_serialiser)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)

@@ -20,7 +20,6 @@ class GenreView(APIView):
         try:
             genre = usecase.get_genre(pk)
             serializer = GenreSerializer(genre)
-            print(serializer.data)
             return Response(serializer.data)
         except ObjectDoesNotExist:
             raise NotFound()

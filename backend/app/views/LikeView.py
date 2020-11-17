@@ -19,7 +19,7 @@ class LikeView(APIView):
         try:
             like = usecase.get_like(like_id=pk)
             serializer = LikeSerializer(like)
-            print(serializer.data)
+            # print(serializer.data)
             return Response(serializer.data)
         except ObjectDoesNotExist:
             raise NotFound()
@@ -39,5 +39,5 @@ class LikeView(APIView):
         if error == 'NotExist':
             return NotFound()
         serializer = LikeSerializer(like)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)

@@ -59,7 +59,7 @@ class UserDBRepo:
 
         payload = jwt_payload_handler(orm_user)
         token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-        print(token)
+        # print(token)
         session = Session(
             username=orm_user.username,
             token=token
@@ -88,7 +88,7 @@ class UserDBRepo:
         value = user.__getattribute__('avatar')
         if value:
             fields_to_update['profile'].append('avatar')
-            print(value)
+            # print(value)
             setattr(profile, 'avatar', value)
         orm_user.save(update_fields=fields_to_update['user'])
         profile.save(update_fields=fields_to_update['profile'])

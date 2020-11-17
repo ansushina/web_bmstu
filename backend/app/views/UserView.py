@@ -29,7 +29,7 @@ class UserView(APIView):
             raise NotFound(detail='not found')
 
         serializer = UserSerializer(user)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
 
     @swagger_auto_schema(
@@ -56,7 +56,7 @@ class UserView(APIView):
         elif error == "invalid_email":
             raise ParseError(detail="invalid_email")
         serializer = UserSerializer(session)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
 
     @swagger_auto_schema(
@@ -81,5 +81,5 @@ class UserView(APIView):
             raise NotFound(detail='not found')
 
         serializer = UserSerializer(user)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)

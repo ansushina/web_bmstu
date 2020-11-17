@@ -19,5 +19,4 @@ class GenresListView(APIView):
             'genres': genres
         }
         serializer = GenresListSerializer(genres_serialiser)
-        print(serializer.data)
         return Response(serializer.data)

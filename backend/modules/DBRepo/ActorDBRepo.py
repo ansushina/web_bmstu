@@ -13,7 +13,7 @@ class ActorDBRepo:
 
     @staticmethod
     def get(actor_id) -> Actor:
-        print(actor_id)
+        # print(actor_id)
         orm_actor = ActorORM.objects.get(pk=actor_id)
         return ActorDBRepo.decode_orm_actor(orm_actor)
 

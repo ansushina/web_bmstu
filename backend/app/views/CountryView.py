@@ -20,7 +20,7 @@ class CountryView(APIView):
         try:
             country = usecase.get_country(pk)
             serializer = CountrySerializer(country)
-            print(serializer.data)
+            # print(serializer.data)
             return Response(serializer.data)
         except ObjectDoesNotExist:
             raise NotFound

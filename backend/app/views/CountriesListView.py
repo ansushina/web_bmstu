@@ -20,5 +20,5 @@ class CountriesListView(APIView):
         }
 
         serializer = CountriesListSerializer(countries_serializer)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)

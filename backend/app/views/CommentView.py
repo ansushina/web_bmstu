@@ -19,7 +19,7 @@ class CommentView(APIView):
         try:
             comment = usecase.get_comment(comment_id=pk)
             serializer = CommentSerializer(comment)
-            print(serializer.data)
+            # print(serializer.data)
             return Response(serializer.data)
         except ObjectDoesNotExist:
             raise NotFound()
@@ -53,7 +53,7 @@ class CommentView(APIView):
         try:
             comment = usecase.update_comment(comment_id=pk, text=request.POST['text'])
             serializer = CommentSerializer(comment)
-            print(serializer.data)
+            # print(serializer.data)
             return Response(serializer.data)
 
         except ObjectDoesNotExist:

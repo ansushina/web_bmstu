@@ -20,7 +20,7 @@ class ActorView(APIView):
         try:
             actor = usecase.get_actor(pk)
             serializer = ActorSerializer(actor)
-            print(serializer.data)
+            # print(serializer.data)
             return Response(serializer.data)
         except ObjectDoesNotExist:
             raise NotFound()
