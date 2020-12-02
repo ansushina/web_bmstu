@@ -26,3 +26,8 @@
 
 ### ER
 ![ER_BD](https://github.com/ansushina/web_bmstu/raw/lab1/diagrams/ER_BD.jpg)
+
+
+### Figma
+
+ [Прототипы приложения](https://www.figma.com/file/tsxPO5cpZHjtGR5b121i31/MoviesToWatch?node-id=97%3A129)
