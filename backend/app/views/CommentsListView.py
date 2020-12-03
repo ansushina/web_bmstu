@@ -1,3 +1,4 @@
+from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import ParseError
 from rest_framework.response import Response
@@ -13,7 +14,18 @@ from modules.serializers.ErrorSerializer import ErrorSerializer
 class CommentsListView(APIView):
     @swagger_auto_schema(
         operation_summary="Returns all film comments",
-        responses={200: CommentsListSerializer(),
+        responses={200: openapi.Response(
+                description="",
+                schema=openapi.Schema(type='array',
+                                      items=openapi.Schema(
+                                          type=openapi.TYPE_OBJECT,
+                                          properties={
+                                              'text': openapi.Schema(type=openapi.TYPE_STRING),
+                                              'id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                                          }
+                                      )
+                                      )
+            ),
                    400: ErrorSerializer()},
         query_serializer=CommentQuerySerializer())
     def get(self, request, film_id, format=None):
@@ -27,12 +39,11 @@ class CommentsListView(APIView):
                                             offset=request.GET.get('offset', 0),
                                             limit=request.GET.get('limit', 10))
         # print(comments)
-        comments_serializer = {
-            'comments': comments
-        }
-        serializer = CommentsListSerializer(comments_serializer)
+        ser_comments = []
+        for comment in comments:
+            ser_comments.append(CommentSerializer(comment).data)
         # print(serializer.data)
-        return Response(serializer.data)
+        return Response(ser_comments)
 
     @swagger_auto_schema(
         operation_summary="Create comment",

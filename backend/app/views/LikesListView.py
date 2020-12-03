@@ -30,20 +30,20 @@ class LikesListView(APIView):
         # print(serializer.data)
         return Response(serializer.data)
 
-    @swagger_auto_schema(
-        operation_summary="Returns info about like",
-        responses={200: LikeSerializer(),
-                   404: ErrorSerializer()}, )
-    def get(self, request, film_id):
-        if not request.user.is_authenticated:
-            raise NotAuthenticated(detail='Please login first', code="401")
-
-        usecase = LikeFactory.get_like_usecase()
-        like, error = usecase.get_like_by_user_and_film(film_id=film_id,
-                                                        user_id=request.user.id)
-        if error == 'NotExist':
-            raise NotFound()
-
-        serializer = LikeSerializer(like)
-        # print(serializer.data)
-        return Response(serializer.data)
+    # @swagger_auto_schema(
+    #     operation_summary="Returns info about like",
+    #     responses={200: LikeSerializer(),
+    #                404: ErrorSerializer()}, )
+    # def get(self, request, film_id):
+    #     if not request.user.is_authenticated:
+    #         raise NotAuthenticated(detail='Please login first', code="401")
+    #
+    #     usecase = LikeFactory.get_like_usecase()
+    #     like, error = usecase.get_like_by_user_and_film(film_id=film_id,
+    #                                                     user_id=request.user.id)
+    #     if error == 'NotExist':
+    #         raise NotFound()
+    #
+    #     serializer = LikeSerializer(like)
+    #     # print(serializer.data)
+    #     return Response(serializer.data)

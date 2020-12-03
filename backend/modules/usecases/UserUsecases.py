@@ -5,8 +5,8 @@ class UserUsecases:
     def __init__(self, user_repo):
         self.user_repo = user_repo
 
-    def get_user(self, user_id) -> (User, str):
-        user, error = self.user_repo.get(user_id)
+    def get_user(self, username) -> (User, str):
+        user, error = self.user_repo.get(username)
         return user, error
 
     def create_user(self, user_data) -> (User, str):
@@ -23,5 +23,6 @@ class UserUsecases:
     def update_user(self, user_data) -> (User, str):
         user = User(username=user_data['username'],
                     email=user_data['email'],
-                    id=user_data['id'])
+                    id=user_data['id'],
+                    avatar=user_data["avatar"])
         return self.user_repo.update(user)

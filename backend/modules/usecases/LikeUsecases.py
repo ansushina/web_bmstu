@@ -21,6 +21,14 @@ class LikeUsecases:
         self.film_repo.count_rating(film_id)
         return new_like, error
 
+    def update_like_by_user_and_film(self, film_id, user_id, value) -> (Like, str):
+        like = Like(value=value)
+        new_like, error = self.like_repo.update_by_user_and_film(user_id=user_id,
+                                                                 like=like,
+                                                                 film_id=film_id)
+        self.film_repo.count_rating(film_id)
+        return new_like, error
+
     def create_like(self, user_id, film_id, value) -> (Like, str):
         like = Like(value=value)
         new_like, error = self.like_repo.create(user_id=user_id,

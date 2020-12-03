@@ -19,8 +19,11 @@ class UserDBRepo:
                     created=orm_user_profile.created_at)
 
     @staticmethod
-    def get(user_id) -> (User, str):
-        orm_user_profile = ProfileORM.objects.get(user_id=user_id)
+    def get(username) -> (User, str):
+        orm_user = UserORM.objects.get(username=username)
+        if not orm_user:
+            return None, "NotExist"
+        orm_user_profile = ProfileORM.objects.get(user_id=orm_user.id)
         if not orm_user_profile:
             return None, "NotExist"
         return UserDBRepo.decode_orm_user_profile(orm_user_profile), None
