@@ -1,0 +1,62 @@
+
+$AccentColor: #751904;
+$InfoColor: #FA9115;
+$PrimaryColor: #FFE6AB;
+$SecondaryColor: #3E0504;
+$TextColor: #0D0502;
+$BackgroundColor: #FCF1E5;
+
+$FontSizeSm: 14px;
+$FontSizeBase: 18px;
+$FontSizeLg: 24px;
+$FontSizeLogo: 36px;
+
+$BoxLightShadow: 0 4px 4px 0 rgba(62, 5, 4,0.25);
+$BoxBrightShadow:  0 4px 4px 0 rgba(62, 5, 4,0.5);
+
+input {
+  font-size: $FontSizeBase;
+  background-color: $BackgroundColor;
+  border-radius: 5px;
+  border: 1px solid $SecondaryColor;
+  padding: 0.5em;
+  box-shadow: $BoxLightShadow;
+}
+
+button {
+  font-size: $FontSizeBase;
+  background-color: $AccentColor;
+  border-radius: 5px;
+  padding: 0.5em;
+  box-shadow: $BoxLightShadow;
+  color: $BackgroundColor;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: $InfoColor;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: $BackgroundColor;
+}
+
+div {
+  color: $TextColor;
+}
+
+a {
+  color: $AccentColor;
+  text-decoration: none;
+  &:hover {
+    color: $InfoColor;
+  }
+}
+
+.title {
+  font-size: $FontSizeLg;
+  margin-bottom: 10px;
+  font-weight: bold;
+}

@@ -1,0 +1,20 @@
+@import "/src/styles";
+
+.login-page-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  height: 80vh;
+  background-color: $PrimaryColor;
+  * {
+    margin: 5px;
+  }
+  .title {
+    font-size: $FontSizeLg;
+    font-weight: bold;
+  }
+  box-shadow: $BoxLightShadow;
+}
