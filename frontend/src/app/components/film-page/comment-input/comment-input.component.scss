@@ -1,0 +1,17 @@
+@import "src/styles";
+
+.comment-input {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: $PrimaryColor;
+  border-radius: 5px;
+  margin-top: 20px;
+  box-shadow: $BoxLightShadow;
+  button {
+    width: fit-content;
+    margin-top: 20px;
+  }
+}

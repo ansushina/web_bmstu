@@ -1,0 +1,16 @@
+@import 'src/styles';
+
+.search-page-div {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.film-cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+

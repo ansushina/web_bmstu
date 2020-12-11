@@ -1,0 +1,15 @@
+@import "src/styles";
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: $PrimaryColor;
+  box-shadow: $BoxLightShadow;
+  border-radius: 5px;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  input {
+    width: 47%;
+    margin-top: 10px;
+  }
+}

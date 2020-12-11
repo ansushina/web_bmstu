@@ -1,61 +1,7 @@
 <div class="film-page-div">
-  <div class="film">
-    <div class="film-image">
-      <img alt="film"/>
-    </div>
-    <div class="film-info">
-      <div class="title">
-        Матрица
-      </div>
-      <div class="film-attributes">
-        <div class="film-attribute">
-          Жанры: ваыаы, вавы, ваыв, ваыва
-        </div>
-        <div class="film-attribute">
-          Жанры: ваыаы, вавы, ваыв, ваыва
-        </div>
-        <div class="film-attribute">
-          Жанры: ваыаы, вавы, ваыв, ваыва
-        </div>
-        <div class="film-attribute">
-          Жанры: ваыаы, вавы, ваыв, ваыва
-        </div>
-        <div class="film-attribute">
-          Жанры: ваыаы, вавы, ваыв, ваыва
-        </div>
-
-      </div>
-      <div class="film-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.
-      </div>
-      <div class="film-user-actions">
-        Оценить
-      </div>
-    </div>
-  </div>
+  <app-film></app-film>
   <div class="comments-list">
-    <div class="comment">
-      <div class="comment-user-info">
-        <div class="comment-user-avatar">
-          <img alt="user"/>
-        </div>
-        <div class="comment-username">
-          Vasilii11cryto1paren
-        </div>
-      </div>
-      <div class="comment-data">
-        <div class="comment-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </div>
-    </div>
+    <app-comment-input></app-comment-input>
+    <app-comment *ngFor="let comment of [1,2,3,4,5]"></app-comment>
   </div>
 </div>

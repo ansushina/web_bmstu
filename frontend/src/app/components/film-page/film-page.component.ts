@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Film} from '../../models/dto/film-dto.model';
 
 @Component({
   selector: 'app-film-page',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilmPageComponent implements OnInit {
 
+  public film: Film;
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
+
 
 }

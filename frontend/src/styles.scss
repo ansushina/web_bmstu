@@ -14,7 +14,7 @@ $FontSizeLogo: 36px;
 $BoxLightShadow: 0 4px 4px 0 rgba(62, 5, 4,0.25);
 $BoxBrightShadow:  0 4px 4px 0 rgba(62, 5, 4,0.5);
 
-input {
+input, textarea {
   font-size: $FontSizeBase;
   background-color: $BackgroundColor;
   border-radius: 5px;

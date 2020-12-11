@@ -6,87 +6,8 @@
   flex-direction: column;
 }
 
-.film {
-  width: 100%;
-  display: flex;
-  padding: 25px;
-  background-color: $PrimaryColor;
-  box-shadow: $BoxLightShadow;
-  box-sizing: border-box;
-}
-
-.film-image {
-  width: 30%;
-  overflow: hidden;
-  border: 5px;
-  background-color: #FFE6AB;
-  box-shadow: $BoxLightShadow;
-  img {
-    height: 100%;
-  }
-}
-
-.film-info {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  margin-left: 30px;
-}
-
-.film-attributes {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.film-attribute {
-  margin-top: 5px;
-}
-
-.film-user-actions {
-  display: flex;
-  select {
-    margin-left: 10px;
-  }
-}
-
-.film-description {
-  margin: 10px 0;
-}
-
 .comments-list {
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.comment {
-  margin-top: 20px;
-  width: 100%;
-  box-shadow: $BoxLightShadow;
-  padding: 20px;
-  display: flex;
-  border-radius: 5px;
-  background-color: $PrimaryColor;
-  box-sizing: border-box;
-}
-
-.comment-user-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-  width: 150px;
-}
-
-.comment-user-avatar {
-  border-radius: 50px;
-  height: 100px;
-  width: 100px;
-  overflow: hidden;
-  box-shadow: $BoxLightShadow;
-  img {
-    height: 50px;
-  }
 }
