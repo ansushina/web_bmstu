@@ -17,6 +17,9 @@ import { FiltersComponent } from './components/search-page/filters/filters.compo
 import { SettingsPageComponent } from './components/settings-page/settings-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegistarationPageComponent } from './components/registaration-page/registaration-page.component';
+import {HttpClientModule} from '@angular/common/http';
+import {FilmService} from './services/film.service';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -36,11 +39,13 @@ import { RegistarationPageComponent } from './components/registaration-page/regi
     LoginPageComponent,
     RegistarationPageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-  ],
-  providers: [],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        FormsModule,
+    ],
+  providers: [FilmService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

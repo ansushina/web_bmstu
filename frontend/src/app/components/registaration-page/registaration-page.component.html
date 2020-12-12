@@ -1,9 +1,9 @@
 <div class="registration-page-div">
   <div class="title"> Регистрация </div>
-  <input type="text" placeholder="Введите имя.."/>
-  <input type="text" placeholder="Введите email.."/>
-  <input type="password" placeholder="Введите пароль.."/>
-  <input type="password" placeholder="Повторите пароль.."/>
-  <button> Войти </button>
+  <input type="text" placeholder="Введите имя.." [(ngModel)]="username"/>
+  <input type="text" placeholder="Введите email.." [(ngModel)]="email"/>
+  <input type="password" placeholder="Введите пароль.." [(ngModel)]="password"/>
+  <input type="password" placeholder="Повторите пароль.." [(ngModel)]="repeatPassword"/>
+  <button (click)="onRegister()"> Войти </button>
   <a routerLink="/login"> Уже зарегистрированы? </a>
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from "../../models/dto/user-dto.model";
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  @Input() public user: User;
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

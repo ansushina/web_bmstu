@@ -1,7 +1,7 @@
 <div class="film-page-div">
-  <app-film></app-film>
+  <app-film [film]="film"></app-film>
   <div class="comments-list">
     <app-comment-input></app-comment-input>
-    <app-comment *ngFor="let comment of [1,2,3,4,5]"></app-comment>
+    <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
   </div>
 </div>

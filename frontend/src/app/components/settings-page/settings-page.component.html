@@ -1,12 +1,22 @@
 <div class="settings-page-div">
   <div class="settings-photo">
-    <img alt="profile photo"/>
+    <img [src]="'http://localhost/' + avatar"  alt="profile photo"/>
   </div>
   <div class="settings-input-div">
     <div class="title"> Настройки </div>
-    <input type="text" placeholder="Введите имя.."/>
-    <input type="password" placeholder="Введите email.."/>
-    <input type="file" placeholder="Выберите файл аватарки.."/>
-    <button> Сохранить </button>
+    <label>
+      Имя пользователя
+      <input type="text" placeholder="Введите имя.." [value]="username" disabled/>
+    </label>
+
+    <label>
+      Email
+      <input type="text" placeholder="Введите email.." [(ngModel)]="email"/>
+    </label>
+    <label>
+      Фото профиля
+    <input type="file" placeholder="Выберите файл аватарки.." [(ngModel)]="avatar"/>
+    </label>
+    <button (click)="onChange()"> Сохранить </button>
   </div>
 </div>

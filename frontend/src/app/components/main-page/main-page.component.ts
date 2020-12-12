@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Film} from "../../models/dto/film-dto.model";
+import {FilmService} from "../../services/film.service";
 
 @Component({
   selector: 'app-main-page',
@@ -7,12 +9,20 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() {
-    console.log('MAIN PAGE конструктор');
+  public mostRatingFilms: Film[];
+  public mostCommentedFilms: Film[];
+
+  constructor(private filmService: FilmService) {
   }
 
   ngOnInit(): void {
-    console.log('MAIN PAGE');
+    this.filmService.getFilms('rating', 0, 5).subscribe(
+      films => this.mostRatingFilms = films,
+      err => console.log('Error: ', err)
+    );
+    this.filmService.getFilms('date', 0, 5).subscribe(
+      films => this.mostCommentedFilms = films,
+      err => console.log('Error: ', err)
+    );
   }
-
 }

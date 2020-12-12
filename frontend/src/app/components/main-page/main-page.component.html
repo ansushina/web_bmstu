@@ -4,10 +4,10 @@
   </div>
   <div class="cards-group">
     <div class="title">Самые популярные</div>
-    <app-film-carousel></app-film-carousel>
+    <app-film-carousel [films]="mostRatingFilms"></app-film-carousel>
   </div>
   <div class="cards-group">
-    <div class="title">Самые популярные</div>
-    <app-film-carousel></app-film-carousel>
+    <div class="title">Самые обсуждаемые</div>
+    <app-film-carousel [films]="mostCommentedFilms"></app-film-carousel>
   </div>
 </div>

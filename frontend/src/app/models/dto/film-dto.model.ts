@@ -11,6 +11,6 @@ export interface Film{
   genres?: Genre[];
   actors?: Actor[];
   countries?: Country[];
-  image: string;
-  created: string;
+  image?: string;
+  created?: string;
 }

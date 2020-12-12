@@ -1,26 +1,36 @@
 <div class="film-card">
   <div class="film-card-image">
-    <img alt="film-image"/>
+    <img  [src]="'http://localhost' +film.image" alt="film-image"/>
   </div>
   <div class="film-card-info">
     <div class="title">
-      Матрица
+      {{film.title}}
     </div>
+
     <div class="film-attributes">
       <div class="film-attribute">
-        Жанры: ваыаы, вавы, ваыв, ваыва
+        Жанры:
+        <a *ngFor="let genre of film.genres; let i = index">
+          {{genre.name}}<a *ngIf="i !== film.genres.length -1">, </a>
+        </a>
       </div>
       <div class="film-attribute">
-        Жанры: ваыаы, вавы, ваыв, ваыва
+        Страны:
+        <a *ngFor="let country of film.countries; let i = index">
+          {{country.name}}<a *ngIf="i !== film.countries.length -1">, </a>
+        </a>
       </div>
       <div class="film-attribute">
-        Жанры: ваыаы, вавы, ваыв, ваыва
+        Актеры:
+        <a *ngFor="let actor of film.actors; let i = index">
+          {{actor.first_name + ' ' + actor.last_name}}<a *ngIf="i !== film.actors.length -1">, </a>
+        </a>
       </div>
       <div class="film-attribute">
-        Жанры: ваыаы, вавы, ваыв, ваыва
+        Год выпуска: {{ film.year }}
       </div>
       <div class="film-attribute">
-        Жанры: ваыаы, вавы, ваыв, ваыва
+        Рейтинг: {{film.rating}}
       </div>
     </div>
   </div>

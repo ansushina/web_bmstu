@@ -1,7 +1,7 @@
 <div class="login-page-div">
-  <div class="title"> Вход </div>
-  <input type="text" placeholder="Введите имя.."/>
-  <input type="password" placeholder="Введите пароль.."/>
-  <button> Войти </button>
+  <div class="title"> Вход {{username}}</div>
+  <input type="text" placeholder="Введите имя.." [(ngModel)]="username"/>
+  <input type="password" placeholder="Введите пароль.." [(ngModel)]="password"/>
+  <button (click)="onLogin()"> Войти </button>
   <a routerLink="/registration"> Новый пользователь? </a>
 </div>
