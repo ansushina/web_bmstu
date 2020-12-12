@@ -22,7 +22,7 @@ class UserUsecases:
 
     def update_user(self, user_data) -> (User, str):
         user = User(username=user_data['username'],
-                    email=user_data['email'],
+                    email=user_data.get('email', None),
                     id=user_data['id'],
-                    avatar=user_data["avatar"])
+                    avatar=user_data.get('avatar', None))
         return self.user_repo.update(user)

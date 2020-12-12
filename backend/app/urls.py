@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from .views.ActorView import ActorView
@@ -27,7 +28,7 @@ urlpatterns = [
     path('actors/<int:pk>/', ActorView.as_view()),
     path('sessions/', SessionView.as_view()),
     path('users/', UsersListView.as_view()),
-    path('users/<slug:username>', UserView.as_view()),
+    path('users/<slug:username>/', UserView.as_view()),
     path('films/<int:pk>/', FilmView.as_view()),
     path('films/', FilmsListView.as_view()),
     path('films/<int:film_id>/comments/', CommentsListView.as_view()),

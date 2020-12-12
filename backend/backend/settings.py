@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'app',
     'rest_framework',
     'drf_yasg',
-    'modules.entities'
+    'modules.entities',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -62,8 +63,10 @@ JWT_AUTH = {
 }
 
 MIDDLEWARE = [
+    'app.csrf_disable.DisableCSRF',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -148,3 +151,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = '/home/nastya/iu7/web_bmstu/static/'
 
 MEDIA_URL = "/"
+
+CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3030',
+] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'http://localhost:3030',
+]
+

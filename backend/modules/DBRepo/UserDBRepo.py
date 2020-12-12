@@ -38,7 +38,7 @@ class UserDBRepo:
             return None, "invalid_username"
         orm_user = UserORM.objects.create_user(
             username=user.username,
-            email=user.username,
+            email=user.email,
             password=user.password
         )
 
@@ -62,9 +62,13 @@ class UserDBRepo:
 
         payload = jwt_payload_handler(orm_user)
         token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-        # print(token)
+        print(token)
+
+        profile = ProfileORM.objects.get(user=orm_user.id)
+
         session = Session(
             username=orm_user.username,
+            id=profile.id,
             token=token
         )
 

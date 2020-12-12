@@ -1,3 +1,5 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import AuthenticationFailed, ParseError
 from rest_framework.permissions import AllowAny
@@ -20,19 +22,21 @@ class SessionView(APIView):
                    403: ErrorSerializer()},
         request_body=UserLoginSerializer()
     )
+    @method_decorator(ensure_csrf_cookie)
     def post(self, request, format=None):
+        print(request.POST, request.data, request.data.get('username', False))
         if not request.data \
-                or not request.POST.get('username', False) \
-                or not request.POST.get('password', False):
+                or not request.data.get('username', False) \
+                or not request.data.get('password', False):
             raise ParseError(detail="Please provide username/password")
 
         usecase = UserFactory.get_user_usecase()
         (session, error) = usecase.create_session(user_data={
-            'username': request.POST['username'],
-            'password': request.POST['password']
+            'username': request.data.get('username', False),
+            'password': request.data.get('password', False)
         })
-
-        if error == "user_not_exist":
+        print(error)
+        if error == "notExist":
             raise AuthenticationFailed()
 
         session.token = session.token.decode()
