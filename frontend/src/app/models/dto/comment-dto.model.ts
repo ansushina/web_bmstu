@@ -5,5 +5,5 @@ export interface Comment {
   text?: string;
   author?: User;
   film?: number;
-  created: string;
+  created?: string;
 }

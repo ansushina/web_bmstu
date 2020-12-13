@@ -11,7 +11,7 @@
   </div>
   <div class="navbar-user-actions" *ngIf="user && user.id">
     <i class="material-icons md-24" routerLink="/settings">settings</i>
-    <i class="material-icons md-24" routerLink="/settings">search</i>
+    <i class="material-icons md-24" (click)="onExit()">exit_to_app</i>
   </div>
 
 </div>

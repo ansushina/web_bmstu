@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {Film} from '../models/dto/film-dto.model';
 import {Like} from '../models/dto/like-dto.model';
 import {Comment} from '../models/dto/comment-dto.model';
+import {hasErrors} from "@angular/compiler-cli/ngcc/src/packages/transformer";
 
 @Injectable()
 export class FilmService {
@@ -39,7 +40,7 @@ export class FilmService {
     }
 
     if (params.query) {
-      str += `query=${params.query}&`;
+      str += `q=${params.query}&`;
     }
 
     if (params.genres) {
@@ -90,26 +91,62 @@ export class FilmService {
   }
 
   public createComment(id: number, source: Comment): Observable<Comment> {
-    return this.http.post<Comment>(`${this.url}/${id}/comments/`, source);
+    let myHeaders;
+    if (localStorage.getItem('user-token')) {
+      myHeaders = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('user-token'),
+      });
+    }
+    return this.http.post<Comment>(`${this.url}/${id}/comments/`, source, {headers: myHeaders});
   }
 
   public updateComment(filmId: number, id: number, source: Comment): Observable<Comment> {
-    return this.http.patch<Comment>(`${this.url}/${filmId}/comments/${id}/`, source);
+    let myHeaders;
+    if (localStorage.getItem('user-token')) {
+      myHeaders = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('user-token'),
+      });
+    }
+    return this.http.patch<Comment>(`${this.url}/${filmId}/comments/${id}/`, source, {headers: myHeaders});
   }
 
   public deleteComment(filmId: number, id: number): Observable<any> {
-    return this.http.delete(`${this.url}/${filmId}/comments/${id}/`);
+    let myHeaders;
+    if (localStorage.getItem('user-token')) {
+      myHeaders = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('user-token'),
+      });
+    }
+    return this.http.delete(`${this.url}/${filmId}/comments/${id}/`, {headers: myHeaders});
   }
 
   public createLike(filmId: number, source: Like): Observable<Like> {
-    return this.http.post<Like>(`${this.url}/${filmId}/likes/`, source);
+    let myHeaders;
+    if (localStorage.getItem('user-token')) {
+      myHeaders = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('user-token'),
+      });
+    }
+    return this.http.post<Like>(`${this.url}/${filmId}/likes/`, source, {headers: myHeaders});
   }
 
   public getLike(filmId: number, userId: number): Observable<Like> {
-    return this.http.get<Like>(`${this.url}/${filmId}/likes/${userId}/`);
+    let myHeaders;
+    if (localStorage.getItem('user-token')) {
+      myHeaders = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('user-token'),
+      });
+    }
+    return this.http.get<Like>(`${this.url}/${filmId}/likes/${userId}/`, {headers: myHeaders});
   }
 
   public updateLike(filmId: number, userId: number, source: Like): Observable<Like> {
-    return this.http.patch<Like>(`${this.url}/${filmId}/likes/${userId}/`, source);
+    let myHeaders;
+    if (localStorage.getItem('user-token')) {
+      myHeaders = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('user-token'),
+      });
+    }
+    return this.http.patch<Like>(`${this.url}/${filmId}/likes/${userId}/`, source, {headers: myHeaders});
   }
 }

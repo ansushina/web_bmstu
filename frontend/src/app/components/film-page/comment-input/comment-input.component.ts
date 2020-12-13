@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-comment-input',
@@ -8,6 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class CommentInputComponent implements OnInit {
 
   constructor() { }
+
+  @Output() public addComment: EventEmitter<string> = new EventEmitter<string>();
+  public comment = '';
+
+  onAddComment(): void {
+    if (this.comment) {
+      this.addComment.emit(this.comment);
+      this.comment = '';
+    }
+  }
 
   ngOnInit(): void {
   }

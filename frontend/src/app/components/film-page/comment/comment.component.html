@@ -8,8 +8,17 @@
     </div>
   </div>
   <div class="comment-data">
-    <div class="comment-text">
+    <div class="comment-text" *ngIf="!edit">
       {{comment.text}}
+    </div>
+    <textarea *ngIf="edit" [(ngModel)]="comment.text"></textarea>
+    <div class="comment-user-actions" *ngIf="comment.author.username === getUsername() && !edit">
+      <i class="material-icons md-24" (click)="onEdit()">edit</i>
+      <i class="material-icons md-24" (click)="onDelete()" >delete</i>
+    </div>
+    <div class="comment-user-actions" *ngIf="edit">
+      <button (click)="onSave()">Сохранить</button>
+      <button (click)="onBack()">Отменить</button>
     </div>
   </div>
 </div>

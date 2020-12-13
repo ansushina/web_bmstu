@@ -252,6 +252,33 @@ export class FilmPageComponent implements OnInit {
       );
   }
 
+  isAuth(): boolean {
+    return localStorage.getItem('username') !== null;
+  }
+
+  onAddComment(comment: string): void {
+    this.filmService.createComment(this.id, {text: comment}).subscribe(
+      newComment => this.comments.push(newComment),
+      error => console.log(error)
+    );
+  }
+
+  onDeleteComment(id: string): void {
+    // tslint:disable-next-line:radix
+    this.filmService.deleteComment(this.id, parseInt(id)).subscribe(
+      res => {
+        let index: number;
+        this.comments.map((el, i) => {
+          // tslint:disable-next-line:radix
+          if (el.id === parseInt(id)) {
+            index = i;
+          }
+        });
+        this.comments.splice(index, 1);
+      }
+    );
+  }
+
   ngOnInit(): void {
     // this.film = FilmMock;
     // this.comments = CommentsMock;

@@ -1,7 +1,7 @@
 <div class="film-page-div">
   <app-film [film]="film"></app-film>
   <div class="comments-list">
-    <app-comment-input></app-comment-input>
-    <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+    <app-comment-input *ngIf="isAuth()" (addComment)="onAddComment($event)"></app-comment-input>
+    <app-comment *ngFor="let comment of comments" [comment]="comment" (deleteComment)="onDeleteComment($event)"></app-comment>
   </div>
 </div>
