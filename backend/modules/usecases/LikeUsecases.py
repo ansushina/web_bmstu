@@ -10,8 +10,8 @@ class LikeUsecases:
         like = self.like_repo.get(like_id)
         return like
 
-    def get_like_by_user_and_film(self, user_id, film_id) -> (Like, str):
-        new_like, error = self.like_repo.get_by_user_and_film(user_id=user_id,
+    def get_like_by_user_and_film(self, username, film_id) -> (Like, str):
+        new_like, error = self.like_repo.get_by_user_and_film(username=username,
                                                               film_id=film_id)
         return new_like, error
 
@@ -21,9 +21,9 @@ class LikeUsecases:
         self.film_repo.count_rating(film_id)
         return new_like, error
 
-    def update_like_by_user_and_film(self, film_id, user_id, value) -> (Like, str):
+    def update_like_by_user_and_film(self, film_id, username, value) -> (Like, str):
         like = Like(value=value)
-        new_like, error = self.like_repo.update_by_user_and_film(user_id=user_id,
+        new_like, error = self.like_repo.update_by_user_and_film(username=username,
                                                                  like=like,
                                                                  film_id=film_id)
         self.film_repo.count_rating(film_id)
@@ -36,3 +36,7 @@ class LikeUsecases:
                                                 like=like)
         self.film_repo.count_rating(film_id)
         return new_like, error
+
+    def delete_like(self, film_id, username):
+        self.like_repo.delete_comment(username=username,
+                                         film_id=film_id)

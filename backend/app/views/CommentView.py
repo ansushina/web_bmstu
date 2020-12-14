@@ -45,13 +45,13 @@ class CommentView(APIView):
                    404: ErrorSerializer()},
         request_body=CommentSerializer())
     def patch(self, request, film_id, pk):
-        if not request.POST.get('text', False):
+        if not request.data.get('text', False):
             raise ParseError(detail="Please provide text")
 
         usecase = CommentFactory.get_comment_usecase()
 
         try:
-            comment = usecase.update_comment(comment_id=pk, text=request.POST['text'])
+            comment = usecase.update_comment(comment_id=pk, text=request.data['text'])
             serializer = CommentSerializer(comment)
             # print(serializer.data)
             return Response(serializer.data)

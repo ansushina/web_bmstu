@@ -15,17 +15,19 @@ class LikeView(APIView):
         responses={200: LikeSerializer(),
                    404: ErrorSerializer(),
                    403: ErrorSerializer()})
-    def get(self, request, film_id, user_id, format=None):
-        if not user_id == request.user.id:
-            return PermissionDenied(detail='You can get allow only for yours information')
+    def get(self, request, film_id, username, format=None):
+        print(username, request.user.username)
+        if not username == request.user.username:
+            raise PermissionDenied(detail='You can get allow only for yours information')
         usecase = LikeFactory.get_like_usecase()
-        try:
-            like = usecase.get_like_by_user_and_film(film_id=film_id, user_id=user_id)
-            serializer = LikeSerializer(like)
-            # print(serializer.data)
-            return Response(serializer.data)
-        except ObjectDoesNotExist:
+
+        print('here')
+        (like, error) = usecase.get_like_by_user_and_film(username=username, film_id=film_id)
+        if error:
             raise NotFound()
+        serializer = LikeSerializer(like)
+        print(serializer.data)
+        return Response(serializer.data)
 
     @swagger_auto_schema(
         operation_summary="Update like",
@@ -35,15 +37,24 @@ class LikeView(APIView):
                    401: ErrorSerializer(),
                    403: ErrorSerializer()},
         request_body=LikeSerializer())
-    def patch(self, request, film_id, user_id):
-        if not user_id == request.user.id:
+    def patch(self, request, film_id, username):
+        if not username == request.user.username:
             return PermissionDenied(detail='You can get allow only for yours information')
-        if not request.POST.get('value', False):
-            raise ParseError(detail="Please provide value")
+        if not request.data.get('value', False) or not request.data.get('value', False) in ['1', '2', '3', '4', '5']:
+            raise ParseError(detail="Please provide value from 1 to 5")
         usecase = LikeFactory.get_like_usecase()
-        like, error = usecase.get_like_by_user_and_film(film_id=film_id, user_id=user_id, value=request.POST['value'])
+        like, error = usecase.update_like_by_user_and_film(film_id=film_id, username=username,
+                                                           value=request.data['value'])
         if error == 'NotExist':
-            return NotFound()
+            raise NotFound()
         serializer = LikeSerializer(like)
         # print(serializer.data)
         return Response(serializer.data)
+
+    def delete(self, request, film_id, username):
+        usecase = LikeFactory.get_like_usecase()
+        try:
+            usecase.delete_like(film_id=film_id, username=username)
+            return Response(status="200")
+        except ObjectDoesNotExist:
+            raise NotFound()

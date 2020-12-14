@@ -34,5 +34,5 @@ urlpatterns = [
     path('films/<int:film_id>/comments/', CommentsListView.as_view()),
     path('films/<int:film_id>/comments/<int:pk>/', CommentView.as_view()),
     path('films/<int:film_id>/likes/', LikesListView.as_view()),
-    path('films/<int:film_id>/likes/<int:user_id>/', LikeView.as_view()),
+    path('films/<int:film_id>/likes/<slug:username>/', LikeView.as_view()),
 ]

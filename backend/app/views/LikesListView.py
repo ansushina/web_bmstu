@@ -16,13 +16,13 @@ class LikesListView(APIView):
                    401: ErrorSerializer()},
         request_body=LikeSerializer())
     def post(self, request, film_id):
-        if not request.POST.get('value', False):
+        if not request.data.get('value', False) or not request.data.get('value', False) in ['1', '2', '3', '4', '5']:
             raise ParseError(detail="Please provide value")
 
         usecase = LikeFactory.get_like_usecase()
         like, error = usecase.create_like(film_id=film_id,
                                           user_id=request.user.id,
-                                          value=request.POST['value'])
+                                          value=request.data['value'])
 
         if error == 'AlreadyExist':
             raise ParseError(detail=error)

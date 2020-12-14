@@ -52,12 +52,12 @@ class CommentsListView(APIView):
                    401: ErrorSerializer()},
         request_body=CommentSerializer())
     def post(self, request, film_id, format=None):
-        if not request.POST.get('text', False):
+        if not request.data.get('text', False):
             raise ParseError(detail="Please provide text")
         usecase = CommentFactory.get_comment_usecase()
         comment = usecase.create_comment(film_id=film_id,
                                          user_id=request.user.id,
-                                         text=request.POST['text'])
+                                         text=request.data['text'])
         serializer = CommentSerializer(comment)
         # print(serializer.data)
         return Response(serializer.data)
