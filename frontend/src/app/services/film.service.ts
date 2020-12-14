@@ -74,12 +74,6 @@ export class FilmService {
   }
 
   public getFilm(id: number): Observable<Film> {
-    // let myHeaders;
-    // if (localStorage.getItem('user-token')) {
-    //   myHeaders = new HttpHeaders({
-    //     Authorization: 'Bearer ' + localStorage.getItem('user-token'),
-    //   });
-    // }
     return this.http.get<Film>(`${this.url}/${id}/`);
   }
 

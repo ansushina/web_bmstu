@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {User} from '../models/dto/user-dto.model';
-import {NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {NavigationStart, Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 
 @Component({

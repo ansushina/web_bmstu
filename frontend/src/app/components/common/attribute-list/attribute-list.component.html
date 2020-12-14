@@ -1,7 +1,7 @@
 <div class="film-attributes">
   <div class="film-attribute">
     Жанры:
-    <a *ngFor="let genre of film.genres; let i = index" routerLink="/search" [queryParams]="{genre: genre.id}" >
+    <a *ngFor="let genre of film.genres; let i = index" routerLink="/search" [queryParams]="{genre: genre.id}">
       {{genre.name}}<a *ngIf="i !== film.genres.length -1">, </a>
     </a>
   </div>
@@ -18,7 +18,7 @@
     </a>
   </div>
   <div class="film-attribute">
-    Год выпуска: <a routerLink="/search" [queryParams]="{yearFrom: film.year, yearTo: film.year}" >{{ film.year }}</a>
+    Год выпуска: <a routerLink="/search" [queryParams]="{yearFrom: film.year, yearTo: film.year}">{{ film.year }}</a>
   </div>
   <div class="film-attribute">
     Рейтинг: {{film.rating}}

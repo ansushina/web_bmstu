@@ -3,14 +3,12 @@
     type="text"
     placeholder="Введите название..."
     [(ngModel)]="filters.query"
-    (change)="onChange()"
-  >
+    (change)="onChange()">
   <mat-select
     [formControl]="genresList"
     multiple
     placeholder="Выберите жанр..."
-    (selectionChange)="onChange()"
-  >
+    (selectionChange)="onChange()">
     <mat-option
       *ngFor="let genre of genres"
       [value]="genre.id.toString()">
@@ -21,9 +19,7 @@
     [formControl]="countriesList"
     multiple
     placeholder="Выберите страну..."
-    (selectionChange)="onChange()"
-
-  >
+    (selectionChange)="onChange()">
     <mat-option
       *ngFor="let country of countries"
       [value]="country.id.toString()">

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {User} from '../../models/dto/user-dto.model';
 
 @Component({
   selector: 'app-settings-page',
@@ -32,7 +31,7 @@ export class SettingsPageComponent implements OnInit {
     );
   }
 
-  onFileChanged(event) {
+  onFileChanged(event): void {
     console.log(event.target);
     this.avatar = event.target.files[0];
   }
@@ -43,7 +42,7 @@ export class SettingsPageComponent implements OnInit {
       this.userService.getUser(this.username).subscribe(
         user => {
           this.email = user.email;
-          this.avatar = user.avatar
+          this.avatar = user.avatar;
         },
         error => console.log(error),
       );

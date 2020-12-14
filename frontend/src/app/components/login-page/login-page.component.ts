@@ -24,15 +24,15 @@ export class LoginPageComponent implements OnInit {
         localStorage.setItem('id', session.id.toString());
         this.router.navigate(['/home']);
       },
-        error => {
-         if (error.status === 401) {
-           this.error = 'Неправильные данные.';
-         } else if (error.status === 400) {
-           this.error = 'Пожалуйста, заполните все поля';
-         } else {
-           this.error = 'Ошибка на cервере';
-         }
+      error => {
+        if (error.status === 401) {
+          this.error = 'Неправильные данные.';
+        } else if (error.status === 400) {
+          this.error = 'Пожалуйста, заполните все поля';
+        } else {
+          this.error = 'Ошибка на cервере';
         }
+      }
     );
   }
 

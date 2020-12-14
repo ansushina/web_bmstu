@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
-import {Genre} from "../models/dto/genre-dto.model";
-import {Actor} from "../models/dto/actor-dto.model";
-import {Country} from "../models/dto/country-dto.model";
+import {Genre} from '../models/dto/genre-dto.model';
+import {Actor} from '../models/dto/actor-dto.model';
+import {Country} from '../models/dto/country-dto.model';
 @Injectable({
   providedIn: 'root'
 })

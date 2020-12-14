@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Film} from '../../../models/dto/film-dto.model';
-import {Like} from "../../../models/dto/like-dto.model";
-import {FilmService} from "../../../services/film.service";
+import {Like} from '../../../models/dto/like-dto.model';
+import {FilmService} from '../../../services/film.service';
 
 @Component({
   selector: 'app-film',
@@ -29,7 +29,7 @@ export class FilmComponent implements OnInit {
 
 
   onLikeChange(): void {
-    console.log("change", this.like.id, this.like.value);
+    console.log('change', this.like.id, this.like.value);
     if (!this.like.id) {
       this.filmService.createLike(this.film.id, {value: this.like.value}).subscribe(
         like => {
@@ -45,11 +45,11 @@ export class FilmComponent implements OnInit {
     } else {
       this.filmService.updateLike(this.film.id, localStorage.getItem('username'), {value: this.like.value})
         .subscribe(
-        like => {
-          this.like = like;
-        },
-        error => console.log(error)
-      );
+          like => {
+            this.like = like;
+          },
+          error => console.log(error)
+        );
     }
   }
 

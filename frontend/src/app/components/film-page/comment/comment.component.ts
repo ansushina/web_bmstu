@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Comment} from '../../../models/dto/comment-dto.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../services/user.service';
-import {FilmService} from "../../../services/film.service";
+import {FilmService} from '../../../services/film.service';
 
 @Component({
   selector: 'app-comment',
@@ -16,6 +15,7 @@ export class CommentComponent implements OnInit {
   public lastValue;
 
   @Output() public deleteComment: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private route: ActivatedRoute, private router: Router, private filmService: FilmService) {
   }
 

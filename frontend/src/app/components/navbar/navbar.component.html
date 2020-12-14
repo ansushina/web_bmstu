@@ -1,6 +1,6 @@
 <div class="navbar-main">
   <div routerLink="/home" class="navbar-logo">
-  <img src="assets/svg/logo.svg" alt="logo"/>
+    <img src="assets/svg/logo.svg" alt="logo"/>
   </div>
   <div class="navbar-search">
     <input type="text" placeholder="Введите запрос..." [(ngModel)]="query" (keyup.enter)="initSearch()"/>
@@ -13,5 +13,4 @@
     <i class="material-icons md-24" routerLink="/settings">settings</i>
     <i class="material-icons md-24" (click)="onExit()">exit_to_app</i>
   </div>
-
 </div>

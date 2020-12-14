@@ -46,7 +46,7 @@ export class RegistarationPageComponent implements OnInit {
         } else if (error.status === 400) {
           if (error.error.detail === 'invalid_email') {
             this.error = 'Пользователь с таким email уже существует.';
-          } else if (error.error.detail === 'invalid_username'){
+          } else if (error.error.detail === 'invalid_username') {
             this.error = 'Пользователь с таким именем уже существует.';
           } else {
             this.error = 'Произошла ошибка, проверьте, что все поля заполнены верно.';

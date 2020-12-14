@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Film} from "../../../models/dto/film-dto.model";
+import {Film} from '../../../models/dto/film-dto.model';
 
 @Component({
   selector: 'app-film-little-card',
@@ -9,7 +9,9 @@ import {Film} from "../../../models/dto/film-dto.model";
 export class FilmLittleCardComponent implements OnInit {
 
   @Input() film: Film;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

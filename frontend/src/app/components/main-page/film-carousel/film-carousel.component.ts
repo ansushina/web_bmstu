@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Film} from "../../../models/dto/film-dto.model";
+import {Film} from '../../../models/dto/film-dto.model';
 
 @Component({
   selector: 'app-film-carousel',
@@ -8,7 +8,9 @@ import {Film} from "../../../models/dto/film-dto.model";
 })
 export class FilmCarouselComponent implements OnInit {
   @Input() films: Film[];
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FilmService} from '../../services/film.service';
-import {Film} from "../../models/dto/film-dto.model";
+import {Film} from '../../models/dto/film-dto.model';
 
 @Component({
   selector: 'app-search-page',
@@ -22,7 +22,7 @@ export class SearchPageComponent implements OnInit {
   public films: Film[];
   public error;
   public offset = 0;
-  public more_flag = false;
+  public moreFlag = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private filmService: FilmService) {
     this.route.queryParamMap
@@ -49,17 +49,17 @@ export class SearchPageComponent implements OnInit {
     this.router.navigate(['/search'], {queryParams: params});
     this.filmService.getFilms('date', this.offset, 10, params).subscribe(
       films => {
-        this.films = this.films && this.more_flag ? this.films.concat(films) : films;
-        this.more_flag = false;
+        this.films = this.films && this.moreFlag ? this.films.concat(films) : films;
+        this.moreFlag = false;
       },
       error => this.error = error
     );
   }
 
-  onMore() {
+  onMore(): void {
     this.offset += 10;
     this.doSearch(this.params);
-    this.more_flag = true;
+    this.moreFlag = true;
   }
 
   ngOnInit(): void {
