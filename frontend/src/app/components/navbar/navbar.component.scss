@@ -1,0 +1,38 @@
+@import '../../../styles';
+
+.navbar-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $AccentColor;
+}
+
+.navbar-logo {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.navbar-search {
+  display: flex;
+  margin: 10px;
+  align-items: center;
+  color: $PrimaryColor;
+  input {
+    box-sizing: border-box;
+    width: 100%;
+  }
+  flex-grow: 15;
+}
+
+.navbar-user-actions {
+  min-width: 90px;
+  color: $PrimaryColor;
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px;
+  flex-grow: 10;
+
+}
+i {
+  margin: 10px;
+}

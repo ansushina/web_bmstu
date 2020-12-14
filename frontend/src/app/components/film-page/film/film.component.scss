@@ -1,0 +1,51 @@
+@import "src/styles";
+.film {
+  width: 100%;
+  display: flex;
+  padding: 25px;
+  background-color: $PrimaryColor;
+  box-shadow: $BoxLightShadow;
+  box-sizing: border-box;
+}
+
+.film-image {
+  width: 30%;
+  min-height: 45vh;
+  overflow: hidden;
+  border: 5px;
+  background-color: #FFE6AB;
+  box-shadow: $BoxLightShadow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    height: 45vh;
+  }
+  max-width: 30vh;
+}
+
+.film-info {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-left: 30px;
+}
+
+
+
+.film-user-actions {
+  display: flex;
+  select {
+    margin-left: 10px;
+    font-size: $FontSizeBase;
+    background-color: $BackgroundColor;
+    border-radius: 5px;
+    border: 1px solid $SecondaryColor;
+    padding: 0.1em;
+    box-shadow: $BoxLightShadow;
+  }
+}
+
+.film-description {
+  margin: 10px 0;
+}

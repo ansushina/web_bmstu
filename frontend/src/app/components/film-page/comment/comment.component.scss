@@ -1,0 +1,51 @@
+@import "src/styles";
+.comment {
+  margin-top: 20px;
+  width: 100%;
+  box-shadow: $BoxLightShadow;
+  padding: 20px;
+  display: flex;
+  border-radius: 5px;
+  background-color: $PrimaryColor;
+  box-sizing: border-box;
+}
+
+.comment-user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  width: 150px;
+}
+
+.comment-user-avatar {
+  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: $BoxLightShadow;
+  img {
+    height: 100px;
+  }
+}
+
+.comment-data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  textarea {
+    resize: vertical;
+  }
+}
+
+.comment-user-actions{
+  align-self: flex-end;
+  * {
+    margin: 5px;
+  }
+}

@@ -1,0 +1,34 @@
+@import "/src/styles";
+
+.main-page-div {
+  width:80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-banner {
+  width: 100%;
+  height: 350px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 20px;
+  background-color: #FFE6AB;
+  border-radius: 5px;
+  box-shadow: $BoxLightShadow;
+  img {
+    width: 100%;
+  }
+}
+
+.cards-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+}
+
+

@@ -1,0 +1,625 @@
+info:
+  title: MoviesToWatch
+  version: 1.0.0
+tags:
+  - name: actors
+    description: information about actors
+  - name: countries
+    description: info about countries
+  - name: genres
+    description: info about genres
+  - name: films
+    description: info about films
+  - name: users
+    description: info about users
+  - name: sessions
+    description: info about sessions
+openapi: 3.0.2
+components:
+  schemas:
+    BadRequest:
+      type: object
+      properties:
+        fields_problems:
+          type: object
+        data:
+          type: object
+        status:
+          type: string
+          example: bad_request
+        message:
+          type: string
+          example: Bad request
+    Actor:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        created:
+          type: string
+          format: date-time
+    ActorsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Actor'
+    Comment:
+      type: object
+      properties:
+        text:
+          type: string
+        author:
+          $ref: '#/components/schemas/User'
+        id:
+          type: integer
+          format: int32
+        created:
+          type: string
+          format: date-time
+        film_id:
+          type: integer
+          format: int32
+    CommentsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        id:
+          type: integer
+          format: int32
+        created:
+          type: string
+          format: date-time
+        avatar:
+          type: string
+          format: url
+    Country:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+          format: int32
+    CountriesList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+    Genre:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+          format: int32
+    GenresList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+    Film:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        created:
+          type: string
+          format: date-time
+        year:
+          type: integer
+          format: int32
+        title:
+          type: string
+        description:
+          type: string
+        rating:
+          type: integer
+          format: int32
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        actors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Actor'
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+        image:
+          type: string
+          format: url
+        like:
+          $ref: '#/components/schemas/Like'
+    FilmsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Film'
+    Like:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int32
+        author_id:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int32
+        created:
+          type: string
+          format: date-time
+        film_id:
+          type: integer
+          format: int32
+paths:
+  /actors:
+    get:
+      tags:
+        - actors
+      description: ''
+      summary: returns all actors
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActorsList'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  /genres:
+    get:
+      tags:
+        - genres
+      description: ''
+      summary: returns all genres
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenresList'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  /countries:
+    get:
+      tags:
+        - countries
+      description: ''
+      summary: returns all countries
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountriesList'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  /films:
+    get:
+      tags:
+        - films
+      description: ''
+      summary: returns all films
+      parameters:
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: sort
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilmsList'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  '/films/{id}':
+    get:
+      tags:
+        - films
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      description: ''
+      summary: returns one film
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Film'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  '/films/{film_id}/comments':
+    get:
+      tags:
+        - films
+      parameters:
+        - name: film_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+      summary: returns all comments for one film
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentsList'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+    post:
+      tags:
+        - films
+      parameters:
+        - name: film_id
+          in: path
+          required: true
+          schema:
+            type: string
+      summary: add new comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: integer
+                  format: int32
+              required:
+                - text
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentsList'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  '/films/{film_id}/comments/{id}':
+    get:
+      tags:
+        - films
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: film_id
+          in: path
+          required: true
+          schema:
+            type: string
+      description: ''
+      summary: returns one comment
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+    delete:
+      tags:
+        - films
+      parameters:
+        - name: film_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      summary: delete comment
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentsList'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  '/films/{film_id}/likes':
+    post:
+      tags:
+        - films
+      summary: add new like
+      parameters:
+        - name: film_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: integer
+                  format: int32
+              required:
+                - value
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+    patch:
+      tags:
+        - films
+      summary: change like value
+      parameters:
+        - name: film_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: integer
+                  format: int32
+              required:
+                - value
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  /users:
+    post:
+      tags:
+        - users
+      summary: add new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - email
+                - password
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  /users/{username}:
+    get:
+      tags:
+        - users
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      description: ''
+      summary: returns one user information
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+    patch:
+      tags:
+        - users
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      summary: changes one user information
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                fileName:
+                  type: string
+                  format: binary
+                username:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  /sessions:
+    post:
+      tags:
+        - sessions
+      description: ''
+      summary: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+    delete:
+      tags:
+        - sessions
+      description: ''
+      summary: logout
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'

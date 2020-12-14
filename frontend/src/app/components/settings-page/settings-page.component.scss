@@ -1,0 +1,49 @@
+@import "/src/styles";
+
+.settings-page-div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  height: 80vh;
+  background-color: $PrimaryColor;
+  box-shadow: $BoxLightShadow;
+}
+
+.settings-input-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  * {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .title {
+    font-size: $FontSizeLg;
+    font-weight: bold;
+  }
+  input {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+.settings-photo {
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: $BoxLightShadow;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img{
+    height: 400px;
+  }
+}
+
+label {
+  width: 100%;
+}

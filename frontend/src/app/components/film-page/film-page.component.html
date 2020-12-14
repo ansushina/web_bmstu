@@ -1,0 +1,12 @@
+<div class="film-page-div" *ngIf="!error">
+  <app-film [film]="film" [like]="like"></app-film>
+  <div class="comments-list">
+    <app-comment-input *ngIf="isAuth()" (addComment)="onAddComment($event)"></app-comment-input>
+    <app-comment *ngFor="let comment of comments.slice(0).reverse()" [comment]="comment"
+                 (deleteComment)="onDeleteComment($event)"></app-comment>
+    <div class="comments-empty" *ngIf="!comments || comments.length == 0">
+      У этого фильма пока нет комментариев.
+    </div>
+  </div>
+</div>
+<app-error *ngIf="error" value="Произошла ошибка! Фильм не найден."></app-error>

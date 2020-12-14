@@ -1,0 +1,23 @@
+@import "/src/styles";
+.film-page-div {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.comments-empty {
+  background-color: $PrimaryColor;
+  border-radius: 5px;
+  box-shadow: $BoxLightShadow;
+  text-align: center;
+  font-size: $FontSizeLg;
+  padding: 20px;
+  margin-top:30px;
+}

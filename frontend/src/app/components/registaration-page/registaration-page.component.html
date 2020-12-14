@@ -1,0 +1,10 @@
+<div class="registration-page-div">
+  <app-title value="Регистрация"></app-title>
+  <div *ngIf="error">{{error}}</div>
+  <input type="text" placeholder="Введите имя.." [(ngModel)]="username"/>
+  <input type="text" placeholder="Введите email.." [(ngModel)]="email"/>
+  <input type="password" placeholder="Введите пароль.." [(ngModel)]="password"/>
+  <input type="password" placeholder="Повторите пароль.." [(ngModel)]="repeatPassword"/>
+  <button (click)="onRegister()"> Войти</button>
+  <a routerLink="/login"> Уже зарегистрированы? </a>
+</div>

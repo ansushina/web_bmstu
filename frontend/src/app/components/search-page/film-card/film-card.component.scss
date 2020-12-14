@@ -1,0 +1,32 @@
+@import "src/styles";
+.film-card {
+  margin-top: 20px;
+  display: flex;
+  padding: 10px;
+  width: 38.5vw;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: $PrimaryColor;
+  box-shadow: $BoxLightShadow;
+  cursor: pointer;
+  height: 94%;
+}
+
+.film-card-image {
+  height: 300px;
+  min-width: 180px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FA9115;
+  border-radius: 5px;
+  img {
+    height: 300px;
+  }
+}
+
+.film-card-info {
+  margin-left: 20px;
+  width: 100%;
+}

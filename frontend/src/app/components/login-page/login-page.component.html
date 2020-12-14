@@ -1,0 +1,8 @@
+<div class="login-page-div">
+  <app-title value="Вход"></app-title>
+  <div *ngIf="error">{{error}}</div>
+  <input type="text" placeholder="Введите имя.." [(ngModel)]="username"/>
+  <input type="password" placeholder="Введите пароль.." [(ngModel)]="password"/>
+  <button (click)="onLogin()"> Войти </button>
+  <a routerLink="/registration"> Новый пользователь? </a>
+</div>

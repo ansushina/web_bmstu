@@ -1,0 +1,44 @@
+<div class="filters">
+  <input
+    type="text"
+    placeholder="Введите название..."
+    [(ngModel)]="filters.query"
+    (change)="onChange()">
+  <mat-select
+    [formControl]="genresList"
+    multiple
+    placeholder="Выберите жанр..."
+    (selectionChange)="onChange()">
+    <mat-option
+      *ngFor="let genre of genres"
+      [value]="genre.id.toString()">
+      {{genre.name}}
+    </mat-option>
+  </mat-select>
+  <mat-select
+    [formControl]="countriesList"
+    multiple
+    placeholder="Выберите страну..."
+    (selectionChange)="onChange()">
+    <mat-option
+      *ngFor="let country of countries"
+      [value]="country.id.toString()">
+      {{country.name}}
+    </mat-option>
+  </mat-select>
+  <mat-select
+    [formControl]="actorsList"
+    multiple
+    placeholder="Выберите актера..."
+    (selectionChange)="onChange()">
+    <mat-option
+      *ngFor="let actor of actors"
+      [value]="actor.id.toString()">
+      {{actor.first_name + ' ' + actor.last_name}}
+    </mat-option>
+  </mat-select>
+  <input type="number" placeholder="Введите год от..." min="1960" max="2020" [(ngModel)]="filters.yearFrom"
+         (change)="onChange()">
+  <input type="number" placeholder="Введите год до..." max="2020" min="1960" [(ngModel)]="filters.yearTo"
+         (change)="onChange()">
+</div>

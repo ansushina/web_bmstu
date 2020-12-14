@@ -1,0 +1,27 @@
+<div class="film-attributes">
+  <div class="film-attribute">
+    Жанры:
+    <a *ngFor="let genre of film.genres; let i = index" routerLink="/search" [queryParams]="{genre: genre.id}">
+      {{genre.name}}<a *ngIf="i !== film.genres.length -1">, </a>
+    </a>
+  </div>
+  <div class="film-attribute">
+    Страны:
+    <a *ngFor="let country of film.countries; let i = index" routerLink="/search" [queryParams]="{country: country.id}">
+      {{country.name}}<a *ngIf="i !== film.countries.length -1">, </a>
+    </a>
+  </div>
+  <div class="film-attribute">
+    Актеры:
+    <a *ngFor="let actor of film.actors; let i = index" routerLink="/search" [queryParams]="{actor: actor.id}">
+      {{actor.first_name + ' ' + actor.last_name}}<a *ngIf="i !== film.actors.length -1">, </a>
+    </a>
+  </div>
+  <div class="film-attribute">
+    Год выпуска: <a routerLink="/search" [queryParams]="{yearFrom: film.year, yearTo: film.year}">{{ film.year }}</a>
+  </div>
+  <div class="film-attribute">
+    Рейтинг: {{film.rating}}
+  </div>
+
+</div>

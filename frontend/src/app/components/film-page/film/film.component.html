@@ -1,0 +1,21 @@
+<div class="film">
+  <div class="film-image">
+    <img [src]="'http://localhost' +film.image" alt="film"/>
+  </div>
+  <div class="film-info">
+    <app-title [value]="film.title">
+    </app-title>
+    <app-attribute-list [film]="film"></app-attribute-list>
+    <div class="film-description">
+      {{film.description}}
+    </div>
+    <div class="film-user-actions" *ngIf="isAuth()">
+      Оценить
+      <select [(ngModel)]="like.value" (change)="onLikeChange()">
+        <option *ngFor="let like of likes" [value]="like.value">
+          {{like.text}}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

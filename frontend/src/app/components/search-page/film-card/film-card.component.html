@@ -1,0 +1,10 @@
+<div [routerLink]="'/film/'+ film.id" class="film-card">
+  <div class="film-card-image">
+    <img [src]="'http://localhost' +film.image" alt="film-image"/>
+  </div>
+  <div class="film-card-info">
+    <app-title [value]="film.title"></app-title>
+    <app-attribute-list [film]="film"></app-attribute-list>
+
+  </div>
+</div>

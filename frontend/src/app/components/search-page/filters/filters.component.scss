@@ -1,0 +1,31 @@
+@import "src/styles";
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  background-color: $PrimaryColor;
+  box-shadow: $BoxLightShadow;
+  border-radius: 5px;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  input, .mat-select {
+    width: 47%;
+    margin-top: 10px;
+  }
+}
+.mat-select {
+  font-size: $FontSizeBase;
+  background-color: $BackgroundColor;
+  border-radius: 5px;
+  border: 1px solid $SecondaryColor;
+  padding: 0.5em;
+  box-shadow: $BoxLightShadow;
+}
+
+input{
+  &::-webkit-input-placeholder {color: rgba(0, 0, 0, .80);}
+  &::-moz-placeholder          {color: rgba(0, 0, 0, .80);}/* Firefox 19+ */
+  &:-moz-placeholder           {color: rgba(0, 0, 0, .80);}/* Firefox 18- */
+  &:-ms-input-placeholder      {color: rgba(0, 0, 0, .80);}
+}
