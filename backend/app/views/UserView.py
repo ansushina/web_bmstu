@@ -49,7 +49,7 @@ class UserView(APIView):
 
         if not request.user.username == username:
             raise PermissionDenied(detail='You can get allow only for yours information')
-        print(request.POST.getlist("avatar"))
+        print(request.FILES.dict())
 
         if (not request.data
                 or not request.data.get('email', False)):
@@ -60,7 +60,7 @@ class UserView(APIView):
             'email': request.data.get('email', None),
             'id': request.user.id,
             'username': username,
-            # 'avatar': request.data.getlist("avatar") or None,
+            'avatar': request.data.getlist("avatar")[0],
         })
 
         if error == 'NotExist':

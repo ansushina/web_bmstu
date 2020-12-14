@@ -66,6 +66,7 @@ class UserDBRepo:
 
         profile = ProfileORM.objects.get(user=orm_user.id)
 
+
         session = Session(
             username=orm_user.username,
             id=profile.id,

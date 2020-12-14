@@ -47,8 +47,8 @@ class FilmDBRepo:
             return orm_films.order_by('-created_at')
         elif sort == 'rating':
             return orm_films.order_by("-rating")
-        elif sort == 'comments':
-            return orm_films.annotate(count=Count('comment')).order_by('-count')
+        elif sort == 'comment':
+            return orm_films.annotate(count=Count('commentorm')).order_by('-count')
         else:
             return orm_films.order_by("title")
 
