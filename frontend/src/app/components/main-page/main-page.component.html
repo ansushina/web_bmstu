@@ -1,4 +1,4 @@
-<div class="main-page-div">
+<div class="main-page-div" *ngIf="!error">
   <div class="main-banner">
     <img alt="banner"/>
   </div>
@@ -10,4 +10,7 @@
     <div class="title">Самые обсуждаемые</div>
     <app-film-carousel [films]="mostCommentedFilms"></app-film-carousel>
   </div>
+</div>
+<div class="error" *ngIf="error">
+  Произошла ошибка! Не удается получить данные.
 </div>

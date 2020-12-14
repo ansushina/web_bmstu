@@ -19,7 +19,10 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { RegistarationPageComponent } from './components/registaration-page/registaration-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FilmService} from './services/film.service';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { AttributeListComponent } from './components/common/attribute-list/attribute-list.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +40,19 @@ import {FormsModule} from "@angular/forms";
     FiltersComponent,
     SettingsPageComponent,
     LoginPageComponent,
-    RegistarationPageComponent
+    RegistarationPageComponent,
+    AttributeListComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        FormsModule,
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+
+  ],
   providers: [FilmService],
   bootstrap: [AppComponent]
 })

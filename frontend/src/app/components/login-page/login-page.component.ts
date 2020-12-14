@@ -14,6 +14,9 @@ export class LoginPageComponent implements OnInit {
 
   public username = '';
   public password = '';
+  public error401;
+  public error400;
+  public error;
 
   onLogin(): void {
     this.userService.login(this.username, this.password).subscribe(
@@ -23,11 +26,28 @@ export class LoginPageComponent implements OnInit {
         localStorage.setItem('id', session.id.toString());
         this.router.navigate(['/home']);
       },
-        error => console.log(error),
+        error => {
+         if (error.status === 401) {
+           this.error401 = error;
+           this.error400 = null;
+           this.error = null;
+         } else if (error.status === 400) {
+           this.error400 = error;
+           this.error401 = null;
+           this.error = null;
+         } else {
+           this.error = error;
+           this.error400 =  null;
+           this.error401 = null;
+         }
+        }
     );
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem('username')) {
+      this.router.navigate(['/']);
+    }
   }
 
 }

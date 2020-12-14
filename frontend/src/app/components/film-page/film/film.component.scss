@@ -21,6 +21,7 @@
   img {
     height: 45vh;
   }
+  max-width: 30vh;
 }
 
 .film-info {
@@ -30,20 +31,18 @@
   margin-left: 30px;
 }
 
-.film-attributes {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
 
-.film-attribute {
-  margin-top: 5px;
-}
 
 .film-user-actions {
   display: flex;
   select {
     margin-left: 10px;
+    font-size: $FontSizeBase;
+    background-color: $BackgroundColor;
+    border-radius: 5px;
+    border: 1px solid $SecondaryColor;
+    padding: 0.1em;
+    box-shadow: $BoxLightShadow;
   }
 }
 

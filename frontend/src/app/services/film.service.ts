@@ -6,7 +6,6 @@ import {Observable} from 'rxjs';
 import {Film} from '../models/dto/film-dto.model';
 import {Like} from '../models/dto/like-dto.model';
 import {Comment} from '../models/dto/comment-dto.model';
-import {hasErrors} from "@angular/compiler-cli/ngcc/src/packages/transformer";
 
 @Injectable()
 export class FilmService {
@@ -22,11 +21,11 @@ export class FilmService {
                   limit = -1,
                   params = {
                     query: '',
-                    genres: [],
-                    actors: [],
-                    countries: [],
-                    yearFrom: 0,
-                    yearTo: 0
+                    genre: [],
+                    actor: [],
+                    country: [],
+                    yearFrom: -1,
+                    yearTo: -1
                   }): Observable<Film[]> {
     let str = '?';
     if (sort !== '') {
@@ -43,37 +42,39 @@ export class FilmService {
       str += `q=${params.query}&`;
     }
 
-    if (params.genres) {
-      params.genres.map((g, i) => {
+    if (params.genre) {
+      params.genre.map((g, i) => {
         str += `genre=${g}&`;
       });
     }
 
-    if (params.actors) {
-      params.actors.map((g, i) => {
+    if (params.actor) {
+      params.actor.map((g, i) => {
         str += `actor=${g}&`;
       });
     }
 
-    if (params.countries) {
-      params.countries.map((g, i) => {
+    if (params.country) {
+      params.country.map((g, i) => {
         str += `country=${g}&`;
       });
     }
 
-    if (params.yearFrom) {
+    if (params.yearFrom > 0) {
       str += `year_from=${params.yearFrom}&`;
     }
 
-    if (params.yearTo) {
+    if (params.yearTo > 0) {
       str += `year_to=${params.yearTo}&`;
     }
+
+    console.log(str);
 
     return this.http.get<Film[]>(`${this.url}/${str}`);
   }
 
   public getFilm(id: number): Observable<Film> {
-     // let myHeaders;
+    // let myHeaders;
     // if (localStorage.getItem('user-token')) {
     //   myHeaders = new HttpHeaders({
     //     Authorization: 'Bearer ' + localStorage.getItem('user-token'),
@@ -82,8 +83,17 @@ export class FilmService {
     return this.http.get<Film>(`${this.url}/${id}/`);
   }
 
-  public getComments(id: number): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${this.url}/${id}/comments/`);
+  public getComments(id: number,
+                     offset = -1,
+                     limit = -1): Observable<Comment[]> {
+    let str = '?';
+    if (offset >= 0) {
+      str += `offset=${offset}&`;
+    }
+    if (limit > 0) {
+      str += `limit=${limit}&`;
+    }
+    return this.http.get<Comment[]>(`${this.url}/${id}/comments/${str}`);
   }
 
   public getComment(filmId: number, id: number): Observable<Comment> {
@@ -130,23 +140,33 @@ export class FilmService {
     return this.http.post<Like>(`${this.url}/${filmId}/likes/`, source, {headers: myHeaders});
   }
 
-  public getLike(filmId: number, userId: number): Observable<Like> {
+  public getLike(filmId: number, username: string): Observable<Like> {
     let myHeaders;
     if (localStorage.getItem('user-token')) {
       myHeaders = new HttpHeaders({
         Authorization: 'Bearer ' + localStorage.getItem('user-token'),
       });
     }
-    return this.http.get<Like>(`${this.url}/${filmId}/likes/${userId}/`, {headers: myHeaders});
+    return this.http.get<Like>(`${this.url}/${filmId}/likes/${username}/`, {headers: myHeaders});
   }
 
-  public updateLike(filmId: number, userId: number, source: Like): Observable<Like> {
+  public updateLike(filmId: number, username: string, source: Like): Observable<Like> {
     let myHeaders;
     if (localStorage.getItem('user-token')) {
       myHeaders = new HttpHeaders({
         Authorization: 'Bearer ' + localStorage.getItem('user-token'),
       });
     }
-    return this.http.patch<Like>(`${this.url}/${filmId}/likes/${userId}/`, source, {headers: myHeaders});
+    return this.http.patch<Like>(`${this.url}/${filmId}/likes/${username}/`, source, {headers: myHeaders});
+  }
+
+  public deleteLike(filmId: number, username: string): Observable<any> {
+    let myHeaders;
+    if (localStorage.getItem('user-token')) {
+      myHeaders = new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('user-token'),
+      });
+    }
+    return this.http.delete(`${this.url}/${filmId}/likes/${username}/`, {headers: myHeaders});
   }
 }

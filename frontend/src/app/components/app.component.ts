@@ -23,6 +23,8 @@ export class AppComponent {
               this.userService.logout();
             },
           );
+        } else {
+          this.user = null;
         }
       }
     });

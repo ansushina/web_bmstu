@@ -3,6 +3,7 @@ import {Film} from '../../models/dto/film-dto.model';
 import {Comment} from '../../models/dto/comment-dto.model';
 import {ActivatedRoute} from '@angular/router';
 import {FilmService} from '../../services/film.service';
+import {Like} from '../../models/dto/like-dto.model';
 
 
 const FilmMock =
@@ -228,28 +229,13 @@ const CommentsMock =
 export class FilmPageComponent implements OnInit {
 
   public film: Film;
-
   public comments: Comment[];
-
+  public like: Like;
   private id: number;
+  public error;
 
   constructor(private route: ActivatedRoute, private filmService: FilmService) {
     this.id = +this.route.snapshot.paramMap.get('id');
-  }
-
-  onclick(): void {
-    fetch('http://localhost/api/v1/films/1/', {
-      mode: 'cors',
-    })
-      .then(res => res.json())
-      .then(
-        (res) => {
-          this.film = res;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
   }
 
   isAuth(): boolean {
@@ -284,12 +270,20 @@ export class FilmPageComponent implements OnInit {
     // this.comments = CommentsMock;
     this.filmService.getFilm(this.id).subscribe(
       film => this.film = film,
-      err => console.log('Error: ', err)
+      err => this.error = err
     );
 
-    this.filmService.getComments(this.id).subscribe(
+    this.filmService.getComments(this.id, 0 , 100).subscribe(
       comments => this.comments = comments,
-      error => console.log(error),
+      error => this.error = error
     );
+
+    if (localStorage.getItem('username')) {
+      // tslint:disable-next-line:radix
+      this.filmService.getLike(this.id, localStorage.getItem('username')).subscribe(
+        like => this.like = like,
+        error => {this.like = {value: '10'}},
+      );
+    }
   }
 }

@@ -11,6 +11,7 @@ export class MainPageComponent implements OnInit {
 
   public mostRatingFilms: Film[];
   public mostCommentedFilms: Film[];
+  public error;
 
   constructor(private filmService: FilmService) {
   }
@@ -18,11 +19,11 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.filmService.getFilms('rating', 0, 5).subscribe(
       films => this.mostRatingFilms = films,
-      err => console.log('Error: ', err)
+      err => this.error = err
     );
     this.filmService.getFilms('date', 0, 5).subscribe(
       films => this.mostCommentedFilms = films,
-      err => console.log('Error: ', err)
+      err => this.error = err
     );
   }
 }

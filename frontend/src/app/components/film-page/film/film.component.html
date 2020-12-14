@@ -6,38 +6,17 @@
     <div class="title">
       {{film.title}}
     </div>
-    <div class="film-attributes">
-      <div class="film-attribute">
-        Жанры:
-        <a *ngFor="let genre of film.genres; let i = index">
-          {{genre.name}}<a *ngIf="i !== film.genres.length -1">, </a>
-        </a>
-      </div>
-      <div class="film-attribute">
-        Страны:
-        <a *ngFor="let country of film.countries; let i = index">
-          {{country.name}}<a *ngIf="i !== film.countries.length -1">, </a>
-        </a>
-      </div>
-      <div class="film-attribute">
-        Актеры:
-        <a *ngFor="let actor of film.actors; let i = index">
-          {{actor.first_name + ' ' + actor.last_name}}<a *ngIf="i !== film.actors.length -1">, </a>
-        </a>
-      </div>
-      <div class="film-attribute">
-        Год выпуска: {{ film.year }}
-      </div>
-      <div class="film-attribute">
-        Рейтинг: {{film.rating}}
-      </div>
-
-    </div>
+    <app-attribute-list [film]="film"></app-attribute-list>
     <div class="film-description">
       {{film.description}}
     </div>
-    <div class="film-user-actions">
+    <div class="film-user-actions" *ngIf="isAuth()">
       Оценить
+        <select [(ngModel)]="like.value" (change)="onLikeChange()">
+          <option *ngFor="let like of likes" [value]="like.value">
+            {{like.text}}
+          </option>
+        </select>
     </div>
   </div>
 </div>

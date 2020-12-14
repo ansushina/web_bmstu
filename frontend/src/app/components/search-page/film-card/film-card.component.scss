@@ -8,10 +8,11 @@
   border-radius: 5px;
   background-color: $PrimaryColor;
   box-shadow: $BoxLightShadow;
+  cursor: pointer;
 }
 
 .film-card-image {
-  height: 250px;
+  height: 300px;
   min-width: 180px;
   overflow: hidden;
   display: flex;
@@ -20,7 +21,7 @@
   background-color: #FA9115;
   border-radius: 5px;
   img {
-    height: 250px;
+    height: 300px;
   }
 }
 

@@ -3,8 +3,8 @@
   <img src="assets/svg/logo.svg" alt="logo"/>
   </div>
   <div class="navbar-search">
-    <input type="text" placeholder="Введите запрос..."/>
-    <i class="material-icons md-24" routerLink="/search">search</i>
+    <input type="text" placeholder="Введите запрос..." [(ngModel)]="query" (keyup.enter)="initSearch()"/>
+    <i class="material-icons md-24" routerLink="/search" [queryParams]="{query: query}">search</i>
   </div>
   <div class="navbar-user-actions" *ngIf="user == null">
     <i class="material-icons md-24" routerLink="/login">person</i>

@@ -9,6 +9,7 @@
 
 .navbar-logo {
   flex-grow: 1;
+  cursor: pointer;
 }
 
 .navbar-search {
@@ -30,4 +31,8 @@
   justify-content: flex-end;
   margin: 5px;
   flex-grow: 10;
+
+}
+i {
+  margin: 10px;
 }

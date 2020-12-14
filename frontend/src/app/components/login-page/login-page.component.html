@@ -1,5 +1,8 @@
 <div class="login-page-div">
-  <div class="title"> Вход {{username}}</div>
+  <div class="title"> Вход</div>
+  <div *ngIf="error401">Неверно введены данные</div>
+  <div *ngIf="error400">Пожалуйста, заполните оба поля</div>
+  <div *ngIf="error">Ошибка на сервере</div>
   <input type="text" placeholder="Введите имя.." [(ngModel)]="username"/>
   <input type="password" placeholder="Введите пароль.." [(ngModel)]="password"/>
   <button (click)="onLogin()"> Войти </button>

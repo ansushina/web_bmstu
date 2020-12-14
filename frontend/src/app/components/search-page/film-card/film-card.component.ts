@@ -95,7 +95,6 @@ export class FilmCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.film = FilmMock;
   }
 
 }
