@@ -3,9 +3,8 @@
     <img  [src]="'http://localhost' +film.image" alt="film"/>
   </div>
   <div class="film-info">
-    <div class="title">
-      {{film.title}}
-    </div>
+    <app-title [value]="film.title" >
+    </app-title>
     <app-attribute-list [film]="film"></app-attribute-list>
     <div class="film-description">
       {{film.description}}

@@ -1,0 +1,13 @@
+@import "src/styles";
+.error {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  background-color: $PrimaryColor;
+  border-radius: 5px;
+  box-shadow: $BoxLightShadow;
+  text-align: center;
+  font-size: $FontSizeLg;
+  padding: 20px;
+}

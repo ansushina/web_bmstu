@@ -1,16 +1,14 @@
 <div class="main-page-div" *ngIf="!error">
   <div class="main-banner">
-    <img alt="banner"/>
+    <img src="assets/jpg/banner" alt="banner"/>
   </div>
   <div class="cards-group">
-    <div class="title">Самые популярные</div>
+    <app-title value="Самые популярные"></app-title>
     <app-film-carousel [films]="mostRatingFilms"></app-film-carousel>
   </div>
   <div class="cards-group">
-    <div class="title">Самые обсуждаемые</div>
+    <app-title value="Самые обсуждаемые"></app-title>
     <app-film-carousel [films]="mostCommentedFilms"></app-film-carousel>
   </div>
 </div>
-<div class="error" *ngIf="error">
-  Произошла ошибка! Не удается получить данные.
-</div>
+<app-error *ngIf="error" value=" Произошла ошибка! Не удается получить данные."></app-error>

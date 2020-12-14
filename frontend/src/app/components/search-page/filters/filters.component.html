@@ -4,7 +4,6 @@
     placeholder="Введите название..."
     [(ngModel)]="filters.query"
     (change)="onChange()"
-    (keyup)="onChange()"
   >
   <mat-select
     [formControl]="genresList"

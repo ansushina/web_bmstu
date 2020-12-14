@@ -23,6 +23,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { AttributeListComponent } from './components/common/attribute-list/attribute-list.component';
+import { ErrorComponent } from './components/common/error/error.component';
+import { TitleComponent } from './components/common/title/title.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AttributeListComponent } from './components/common/attribute-list/attri
     SettingsPageComponent,
     LoginPageComponent,
     RegistarationPageComponent,
-    AttributeListComponent
+    AttributeListComponent,
+    ErrorComponent,
+    TitleComponent
   ],
   imports: [
     BrowserModule,

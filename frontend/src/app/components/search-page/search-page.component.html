@@ -2,12 +2,10 @@
   <app-filters [filters]="params" (initSearch)="doSearch($event)"> </app-filters>
   <div class="film-cards-list" *ngIf="films.length > 0">
     <app-film-card *ngFor="let film of films" [film]="film"></app-film-card>
-  <div class="film-cards-list" *ngIf="!films || films.length == 0">
-    <div class="title"> Извините, по вашему запросу ничего не найдено</div>
   </div>
-
+  <app-error *ngIf="!films || films.length == 0" value="Извините, по вашему запросу ничего не найдено" >
+  </app-error>
+  <button (click)="onMore()" *ngIf="films && films.length !==0 && films.length % 10 == 0">Еще результаты</button>
 </div>
 
-<div class="error" *ngIf="error">
-  Произошла ошибка! Не удается получить данные! Повторите попытку позднее.
-</div>
+<app-error *ngIf="error" value=" Произошла ошибка! Не удается получить данные! Повторите попытку позднее."></app-error>

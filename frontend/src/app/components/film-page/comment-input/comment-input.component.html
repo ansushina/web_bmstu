@@ -1,5 +1,5 @@
 <div class="comment-input">
-  <div class="title"> Оставьте свой комментарий </div>
+  <app-title value="Оставьте свой комментарий"> </app-title>
   <textarea rows="5" placeholder="Введите текст" [(ngModel)]="comment" (keyup.enter)="onAddComment()"></textarea>
   <button (click)="onAddComment()" [disabled]="!comment"> Отправить </button>
 </div>

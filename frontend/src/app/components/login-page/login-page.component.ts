@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {UserService} from '../../services/user.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -14,9 +14,7 @@ export class LoginPageComponent implements OnInit {
 
   public username = '';
   public password = '';
-  public error401;
-  public error400;
-  public error;
+  public error: string;
 
   onLogin(): void {
     this.userService.login(this.username, this.password).subscribe(
@@ -28,17 +26,11 @@ export class LoginPageComponent implements OnInit {
       },
         error => {
          if (error.status === 401) {
-           this.error401 = error;
-           this.error400 = null;
-           this.error = null;
+           this.error = 'Неправильные данные.';
          } else if (error.status === 400) {
-           this.error400 = error;
-           this.error401 = null;
-           this.error = null;
+           this.error = 'Пожалуйста, заполните все поля';
          } else {
-           this.error = error;
-           this.error400 =  null;
-           this.error401 = null;
+           this.error = 'Ошибка на cервере';
          }
         }
     );

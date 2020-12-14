@@ -22,6 +22,7 @@ export class SearchPageComponent implements OnInit {
   public films: Film[];
   public error;
   public offset = 0;
+  public more_flag = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private filmService: FilmService) {
     this.route.queryParamMap
@@ -46,8 +47,11 @@ export class SearchPageComponent implements OnInit {
   }): void {
     this.params = params;
     this.router.navigate(['/search'], {queryParams: params});
-    this.filmService.getFilms('date', 0 , 250, params).subscribe(
-      films => this.films = films,
+    this.filmService.getFilms('date', this.offset, 10, params).subscribe(
+      films => {
+        this.films = this.films && this.more_flag ? this.films.concat(films) : films;
+        this.more_flag = false;
+      },
       error => this.error = error
     );
   }
@@ -55,6 +59,7 @@ export class SearchPageComponent implements OnInit {
   onMore() {
     this.offset += 10;
     this.doSearch(this.params);
+    this.more_flag = true;
   }
 
   ngOnInit(): void {

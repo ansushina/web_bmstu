@@ -3,7 +3,7 @@
     <img [src]="'http://localhost/' + avatar"  alt="profile photo"/>
   </div>
   <div class="settings-input-div">
-    <div class="title"> Настройки </div>
+    <app-title value="Настройки"></app-title>
     <label>
       Имя пользователя
       <input type="text" placeholder="Введите имя.." [value]="username" disabled/>
@@ -15,7 +15,7 @@
     </label>
     <label>
       Фото профиля
-    <input type="file" placeholder="Выберите файл аватарки.." [(ngModel)]="avatar"/>
+    <input id='avatar-input' type="file" placeholder="Выберите файл аватарки.." (change)="onFileChanged($event)"/>
     </label>
     <button (click)="onChange()"> Сохранить </button>
   </div>

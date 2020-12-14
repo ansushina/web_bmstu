@@ -1,8 +1,6 @@
 <div class="registration-page-div">
-  <div class="title"> Регистрация </div>
-  <div *ngIf="error401">Неверно введены данные</div>
-  <div *ngIf="error400">{{error400}}</div>
-  <div *ngIf="error">Ошибка на сервере</div>
+  <app-title value="Регистрация"></app-title>
+  <div *ngIf="error">{{error}}</div>
   <input type="text" placeholder="Введите имя.." [(ngModel)]="username"/>
   <input type="text" placeholder="Введите email.." [(ngModel)]="email"/>
   <input type="password" placeholder="Введите пароль.." [(ngModel)]="password"/>

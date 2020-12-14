@@ -21,7 +21,7 @@ export class MainPageComponent implements OnInit {
       films => this.mostRatingFilms = films,
       err => this.error = err
     );
-    this.filmService.getFilms('date', 0, 5).subscribe(
+    this.filmService.getFilms('comment', 0, 5).subscribe(
       films => this.mostCommentedFilms = films,
       err => this.error = err
     );

@@ -18,17 +18,23 @@ export class SettingsPageComponent implements OnInit {
   }
 
   onChange(): void {
-    const user = {
-      email: this.email,
-      avatar: this.avatar,
-    };
-    this.userService.updateUser(this.username, user).subscribe(
+    const formData = new FormData();
+    formData.append('avatar', this.avatar);
+    formData.append('email', this.email);
+    console.log(this.avatar);
+
+    this.userService.updateUser(this.username, formData).subscribe(
       newuser => {
         this.email = newuser.email;
         this.avatar = newuser.avatar;
       },
       error => console.log(error)
     );
+  }
+
+  onFileChanged(event) {
+    console.log(event.target);
+    this.avatar = event.target.files[0];
   }
 
   ngOnInit(): void {

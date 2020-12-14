@@ -1,7 +1,7 @@
 @import "/src/styles";
 
 .film-little-card {
-  height: 19vw;
+  height: 22vw;
   width: 15vw;
   overflow: hidden;
   display: flex;
@@ -13,7 +13,12 @@
   outline: none;
   cursor: pointer;
   box-shadow: $BoxLightShadow;
+  :hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+  }
   img {
     width: 15vw;
   }
+
 }
