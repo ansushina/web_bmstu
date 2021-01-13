@@ -1,5 +1,7 @@
 from typing import List
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from app.models.Comment import CommentORM
 from app.models.Profile import ProfileORM
 from modules.DBRepo.UserDBRepo import UserDBRepo
@@ -20,8 +22,11 @@ class CommentDBRepo:
 
     @staticmethod
     def get(comment_id) -> Comment:
-        orm_comment = CommentORM.objects.get(pk=comment_id)
-        return CommentDBRepo.decode_orm_comment(orm_comment)
+        try:
+            orm_comment = CommentORM.objects.get(pk=comment_id)
+            return CommentDBRepo.decode_orm_comment(orm_comment)
+        except ObjectDoesNotExist:
+            return None
 
     @staticmethod
     def get_all(film_id, offset=0, limit=10) -> List[Comment]:

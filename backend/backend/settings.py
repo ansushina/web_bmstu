@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'drf_yasg',
     'modules.entities',
     'corsheaders',
+    'tests',
+    'pytest',
+    'pytest_mock',
+    'pytest_django',
 ]
 
 REST_FRAMEWORK = {

@@ -1,5 +1,7 @@
 from typing import List
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from app.models.Actor import ActorORM
 from modules.entities.Actor import Actor
 
@@ -14,8 +16,14 @@ class ActorDBRepo:
     @staticmethod
     def get(actor_id) -> Actor:
         # print(actor_id)
-        orm_actor = ActorORM.objects.get(pk=actor_id)
-        return ActorDBRepo.decode_orm_actor(orm_actor)
+        try:
+            orm_actor = ActorORM.objects.get(pk=actor_id)
+
+            return ActorDBRepo.decode_orm_actor(orm_actor)
+
+        except ObjectDoesNotExist:
+            return None
+
 
     @staticmethod
     def get_all() -> List[Actor]:
