@@ -1,5 +1,7 @@
 from typing import List
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from app.models.Like import LikeORM
 from app.models.Profile import ProfileORM
 from modules.entities.Like import Like
@@ -17,8 +19,11 @@ class LikeDBRepo:
     @staticmethod
     def get(like_id) -> Like:
         # print(like_id)
-        orm_like = LikeORM.objects.get(pk=like_id)
-        return LikeDBRepo.decode_orm_like(orm_like)
+        try:
+            orm_like = LikeORM.objects.get(pk=like_id)
+            return LikeDBRepo.decode_orm_like(orm_like)
+        except ObjectDoesNotExist:
+            return None
 
     @staticmethod
     def get_by_user_and_film(username, film_id) -> (Like, str):

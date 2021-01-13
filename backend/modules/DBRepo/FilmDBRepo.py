@@ -1,5 +1,7 @@
 from typing import List
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from app.models.Film import FilmORM
 from django.db.models import Count, Q
 
@@ -38,8 +40,11 @@ class FilmDBRepo:
 
     @staticmethod
     def get(film_id):
-        orm_film = FilmORM.objects.get(id=film_id)
-        return FilmDBRepo.decode_orm_film(orm_film)
+        try:
+            orm_film = FilmORM.objects.get(id=film_id)
+            return FilmDBRepo.decode_orm_film(orm_film)
+        except ObjectDoesNotExist:
+            return None
 
     @staticmethod
     def _sort_films(orm_films, sort='title'):

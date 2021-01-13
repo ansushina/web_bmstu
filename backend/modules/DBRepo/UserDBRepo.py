@@ -1,5 +1,6 @@
 import jwt
 from django.contrib import auth
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework_jwt.serializers import jwt_payload_handler
 
 from app.models.Profile import ProfileORM
@@ -20,13 +21,16 @@ class UserDBRepo:
 
     @staticmethod
     def get(username) -> (User, str):
-        orm_user = UserORM.objects.get(username=username)
-        if not orm_user:
+        try:
+            orm_user = UserORM.objects.get(username=username)
+            if not orm_user:
+                return None, "NotExist"
+            orm_user_profile = ProfileORM.objects.get(user_id=orm_user.id)
+            if not orm_user_profile:
+                return None, "NotExist"
+            return UserDBRepo.decode_orm_user_profile(orm_user_profile), None
+        except ObjectDoesNotExist:
             return None, "NotExist"
-        orm_user_profile = ProfileORM.objects.get(user_id=orm_user.id)
-        if not orm_user_profile:
-            return None, "NotExist"
-        return UserDBRepo.decode_orm_user_profile(orm_user_profile), None
 
     @staticmethod
     def create(user: User) -> (User, str):

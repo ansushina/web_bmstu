@@ -1,5 +1,7 @@
 from typing import List
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from app.models.Country import CountryORM
 from modules.entities.Country import Country
 
@@ -12,8 +14,11 @@ class CountryDBRepo:
 
     @staticmethod
     def get(country_id) -> Country:
-        orm_country = CountryORM.objects.get(pk=country_id)
-        return CountryDBRepo.decode_orm_country(orm_country)
+        try:
+            orm_country = CountryORM.objects.get(pk=country_id)
+            return CountryDBRepo.decode_orm_country(orm_country)
+        except ObjectDoesNotExist:
+            return None
 
     @staticmethod
     def get_all() -> List[Country]:
