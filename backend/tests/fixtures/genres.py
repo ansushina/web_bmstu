@@ -12,7 +12,7 @@ def simple_genre():
 
 @pytest.fixture
 def genres_20():
-    genres = [GenreORM(name=("genre" + str(i))) for i in range(20)]
-    return GenreORM.objects.bulk_create(genres)
+    genres = [GenreORM.objects.create(name=("genre" + str(i))) for i in range(20)]
+    return genres
 
 

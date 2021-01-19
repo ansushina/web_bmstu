@@ -1,0 +1,42 @@
+.shared_runners:
+  tags:
+    - docker
+
+image: wildfish/django
+
+before_script:
+  - cd backend
+  - python -V  # Print out python version for debugging
+  - pip list 
+  - pip3 list
+  - pip3 install --upgrade pip
+  - pip3 install -r requirements.txt
+  - pip3 install  pytest-mock pytest-django drf-yasg django-cors-headers
+  - python -m pip install Pillow
+  - python3 manage.py migrate
+
+stages:
+  - unit-tests
+  - integration-tests
+  - e2e-tests
+
+unit-test:
+  extends:
+    - .shared_runners
+  stage: unit-tests
+  script:
+    - pytest tests/app/unit
+
+integrantion-test:
+  extends:
+    - .shared_runners
+  stage: integration-tests
+  script: 
+    - pytest tests/app/integration
+
+e2e-test: 
+  extends:
+    - .shared_runners
+  stage: e2e-tests
+  script: 
+    - pytest tests/app/e2e

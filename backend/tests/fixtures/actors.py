@@ -13,7 +13,7 @@ def simple_actor():
 
 @pytest.fixture
 def actors_20():
-    actors = [ActorORM(firstName=("actor" + str(i)), lastName=("last" + str(i))) for i in range(20)]
-    return ActorORM.objects.bulk_create(actors)
+    actors = [ActorORM.objects.create(firstName=("actor" + str(i)), lastName=("last" + str(i))) for i in range(20)]
+    return actors
 
 

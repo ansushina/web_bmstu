@@ -12,7 +12,7 @@ def simple_country():
 
 @pytest.fixture
 def countries_20():
-    countries = [CountryORM(name=("country" + str(i))) for i in range(20)]
-    return CountryORM.objects.bulk_create(countries)
+    countries = [CountryORM.objects.create(name=("country" + str(i))) for i in range(20)]
+    return countries
 
 

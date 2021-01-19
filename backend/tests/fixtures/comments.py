@@ -11,7 +11,7 @@ from .actors import *
 
 
 @pytest.fixture
-def simple_comment(simple_profile, genres_20, actors_20, countries_20):
+def simple_comment(simple_profile):
     f = FilmORM.objects.create(
         title='title',
         year=1930,
@@ -31,9 +31,9 @@ def comments_20(simple_profile, genres_20, actors_20, countries_20):
         year=1930,
         description='blabla'
     )
-    comments = [CommentORM(
+    comments = [CommentORM.objects.create(
         author_id=simple_profile.id,
         film_id=f.id,
         text=("blabla" + str(i))
     ) for i in range(20)]
-    return CommentORM.objects.bulk_create(comments)
+    return comments

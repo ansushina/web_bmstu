@@ -21,7 +21,7 @@ class CommentBuilder:
         self.author = 1
         self.film = 1
         self.created = None
-        self.id = None
+        self.id = 1
 
     def build(self):
         return Comment(text=self.text,

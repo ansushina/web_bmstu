@@ -1,10 +1,12 @@
+
+
 import pytest
 from django.contrib.auth.models import User as UserORM
+from memory_profiler import profile
 
 from app.models.Profile import ProfileORM
 
 from modules.entities.User import User
-
 
 @pytest.fixture
 def simple_profile():

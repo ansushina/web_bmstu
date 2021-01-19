@@ -8,6 +8,7 @@ from pytz import UTC
 from backend import settings
 from tests.fixtures import *  # dont remove
 
+# pytest_plugins = ['pytest_profiling']
 
 @pytest.fixture(autouse=True)
 def auto_use_db(db):
@@ -54,3 +55,5 @@ def json_client(client):
 @pytest.fixture(scope="session", autouse=True)
 def setup_settings():
     settings.DEBUG = True
+
+
